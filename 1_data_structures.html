@@ -1,0 +1,2683 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Data Structures</title>
+
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/clipboard-1.7.1/clipboard.min.js"></script>
+<link href="site_libs/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
+<link href="site_libs/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
+<script src="site_libs/klippy-0.0.0.9500/js/klippy.min.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Python Tutorial</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+    Home
+  </a>
+</li>
+<li>
+  <a href="about.html">
+    <span class="fa fa-hand-spock"></span>
+     
+    Resumen del contenido
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-bars"></span>
+     
+    Contenido
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="divider"></li>
+    <li>
+      <a href="1_data_structures.html">Data structures</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Work In Progress</li>
+    <li class="divider"></li>
+    <li>
+      <a href="2_handling_exceptions-resources.html">Handling exceptions &amp; resources</a>
+    </li>
+    <li class="dropdown-header">Classes</li>
+    <li class="dropdown-header">Basic concepts</li>
+    <li class="dropdown-header">Magic methods</li>
+    <li class="dropdown-header">Librerías...</li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html">
+    <span class="fa fa-gears"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Data Structures</h1>
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#lists" id="toc-lists"><span
+class="toc-section-number">1</span> Lists</a>
+<ul>
+<li><a href="#different-ways-for-creating-lists"
+id="toc-different-ways-for-creating-lists"><span
+class="toc-section-number">1.1</span> Different ways for creating
+lists</a>
+<ul>
+<li><a href="#with-square-brackets" id="toc-with-square-brackets"><span
+class="toc-section-number">1.1.1</span> With square brackets</a></li>
+<li><a href="#with-list-function" id="toc-with-list-function"><span
+class="toc-section-number">1.1.2</span> With <code>list()</code>
+function</a></li>
+<li><a href="#with-unpacking-operator"
+id="toc-with-unpacking-operator"><span
+class="toc-section-number">1.1.3</span> With unpacking <code>*</code>
+operator</a></li>
+<li><a href="#concatenations-without-the-operator"
+id="toc-concatenations-without-the-operator"><span
+class="toc-section-number">1.1.4</span> Concatenations without the
+<code>+</code> operator</a></li>
+<li><a href="#using-append-method-in-a-traditional-for-loop"
+id="toc-using-append-method-in-a-traditional-for-loop"><span
+class="toc-section-number">1.1.5</span> Using <code>append()</code>
+method in a traditional <code>for</code> loop</a></li>
+<li><a href="#using-a-comprehension-expression"
+id="toc-using-a-comprehension-expression"><span
+class="toc-section-number">1.1.6</span> Using a
+<code>comprehension expression</code></a></li>
+<li><a
+href="#copying-totally-or-partially-or-inverting-a-list-with-the-colon-operator"
+id="toc-copying-totally-or-partially-or-inverting-a-list-with-the-colon-operator"><span
+class="toc-section-number">1.1.7</span> Copying totally or partially or
+inverting a list with the colon <code>:</code> operator</a></li>
+</ul></li>
+<li><a href="#list-unpacking" id="toc-list-unpacking"><span
+class="toc-section-number">1.2</span> List unpacking</a>
+<ul>
+<li><a href="#unpacking-all-elements"
+id="toc-unpacking-all-elements"><span
+class="toc-section-number">1.2.1</span> Unpacking all elements</a></li>
+<li><a
+href="#unpacking-the-initials-elements-and-packing-the-rest-of-them"
+id="toc-unpacking-the-initials-elements-and-packing-the-rest-of-them"><span
+class="toc-section-number">1.2.2</span> Unpacking the initials elements
+and packing the rest of them</a></li>
+<li><a
+href="#unpacking-the-first-and-last-elements-and-packing-all-in-between"
+id="toc-unpacking-the-first-and-last-elements-and-packing-all-in-between"><span
+class="toc-section-number">1.2.3</span> Unpacking the first and last
+elements and packing all in between</a></li>
+</ul></li>
+<li><a href="#obtaning-indexes-orand-elements"
+id="toc-obtaning-indexes-orand-elements"><span
+class="toc-section-number">1.3</span> Obtaning indexes or/and
+elements</a>
+<ul>
+<li><a
+href="#obtaining-the-index-of-a-certain-element-of-a-list-with-the-index-method"
+id="toc-obtaining-the-index-of-a-certain-element-of-a-list-with-the-index-method"><span
+class="toc-section-number">1.3.1</span> Obtaining the index of a certain
+element of a list with the <code>index()</code> method</a></li>
+<li><a
+href="#obtaining-the-indexes-elements-of-a-list-with-the-enumerate-function"
+id="toc-obtaining-the-indexes-elements-of-a-list-with-the-enumerate-function"><span
+class="toc-section-number">1.3.2</span> Obtaining the indexes &amp;
+elements of a list with the <code>enumerate()</code> function</a></li>
+</ul></li>
+<li><a href="#modifying-a-list" id="toc-modifying-a-list"><span
+class="toc-section-number">1.4</span> Modifying a list</a>
+<ul>
+<li><a href="#adding-elements-append-and-insert-methods"
+id="toc-adding-elements-append-and-insert-methods"><span
+class="toc-section-number">1.4.1</span> Adding elements:
+<code>append()</code> and <code>insert()</code> methods</a></li>
+<li><a
+href="#removing-elements-pop-remove-and-clear-methods-del-construct"
+id="toc-removing-elements-pop-remove-and-clear-methods-del-construct"><span
+class="toc-section-number">1.4.2</span> Removing elements:
+<code>pop()</code>, <code>remove()</code> and <code>clear()</code>
+methods, <code>del</code> construct</a></li>
+</ul></li>
+<li><a href="#sorting-lists" id="toc-sorting-lists"><span
+class="toc-section-number">1.5</span> Sorting lists</a>
+<ul>
+<li><a href="#sorted-function-and-sort-method"
+id="toc-sorted-function-and-sort-method"><span
+class="toc-section-number">1.5.1</span> <code>sorted()</code> function
+and <code>sort()</code> method</a></li>
+<li><a href="#sorting-a-list-of-tuples-key-parameter-of-sorted-and-sort"
+id="toc-sorting-a-list-of-tuples-key-parameter-of-sorted-and-sort"><span
+class="toc-section-number">1.5.2</span> Sorting a list of tuples:
+<em>key parameter</em> of <code>sorted()</code> and
+<code>sort()</code></a>
+<ul>
+<li><a href="#sorting-with-a-reference-to-a-explicit-function-as-a-key"
+id="toc-sorting-with-a-reference-to-a-explicit-function-as-a-key"><span
+class="toc-section-number">1.5.2.1</span> Sorting with a
+<strong>reference</strong> to a <strong>explicit function</strong> as a
+key</a></li>
+<li><a href="#sorting-with-a-lambda-or-anonimous-function-as-a-key"
+id="toc-sorting-with-a-lambda-or-anonimous-function-as-a-key"><span
+class="toc-section-number">1.5.2.2</span> Sorting with a
+<code>lambda</code> (or anonimous) function as a key</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#mapping-a-list-of-tuples-into-another-list"
+id="toc-mapping-a-list-of-tuples-into-another-list"><span
+class="toc-section-number">1.6</span> Mapping a list of tuples into
+another list</a>
+<ul>
+<li><a href="#using-append-in-a-traditional-for-loop"
+id="toc-using-append-in-a-traditional-for-loop"><span
+class="toc-section-number">1.6.1</span> Using <code>append()</code> in a
+traditional <code>for</code> loop</a></li>
+<li><a href="#using-map-and-lambda-functions"
+id="toc-using-map-and-lambda-functions"><span
+class="toc-section-number">1.6.2</span> Using <code>map()</code> and
+<code>lambda</code> functions</a>
+<ul>
+<li><a href="#printing-a-map-object"
+id="toc-printing-a-map-object"><span
+class="toc-section-number">1.6.2.1</span> Printing a <code>map</code>
+object</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#filtering-a-list" id="toc-filtering-a-list"><span
+class="toc-section-number">1.7</span> Filtering a list</a>
+<ul>
+<li><a href="#using-if-and-append-in-a-traditional-for-loop"
+id="toc-using-if-and-append-in-a-traditional-for-loop"><span
+class="toc-section-number">1.7.1</span> Using <code>if</code> and
+<code>append()</code> in a traditional <code>for</code> loop</a></li>
+<li><a href="#using-filter-and-lambda-functions"
+id="toc-using-filter-and-lambda-functions"><span
+class="toc-section-number">1.7.2</span> Using <code>filter()</code> and
+<code>lambda</code> functions</a>
+<ul>
+<li><a href="#printing-a-filter-object"
+id="toc-printing-a-filter-object"><span
+class="toc-section-number">1.7.2.1</span> Printing a <code>filter</code>
+object</a></li>
+</ul></li>
+</ul></li>
+<li><a
+href="#the-preferred-way-to-map-and-filter-lists-in-python-comunity-list-comprehensions"
+id="toc-the-preferred-way-to-map-and-filter-lists-in-python-comunity-list-comprehensions"><span
+class="toc-section-number">1.8</span> The preferred way to map and
+filter lists in python comunity: <strong>list
+comprehensions</strong></a>
+<ul>
+<li><a
+href="#comparing-the-functional-programming-way-map-and-filter-vs-the-python-way-comprehension-expression"
+id="toc-comparing-the-functional-programming-way-map-and-filter-vs-the-python-way-comprehension-expression"><span
+class="toc-section-number">1.8.1</span> Comparing the functional
+programming way (<code>map</code> and <code>filter</code>) vs the python
+way (<code>comprehension expression</code>)</a></li>
+</ul></li>
+<li><a href="#combining-multiple-lists-of-same-length-zip-function"
+id="toc-combining-multiple-lists-of-same-length-zip-function"><span
+class="toc-section-number">1.9</span> Combining multiple lists of same
+length: <code>zip()</code> function</a></li>
+</ul></li>
+<li><a href="#stacks" id="toc-stacks"><span
+class="toc-section-number">2</span> Stacks</a>
+<ul>
+<li><a href="#lifo-rule" id="toc-lifo-rule"><span
+class="toc-section-number">2.1</span> <code>LIFO</code> rule</a></li>
+<li><a href="#implementation-with-lists"
+id="toc-implementation-with-lists"><span
+class="toc-section-number">2.2</span> Implementation with
+<code>list</code>s</a></li>
+</ul></li>
+<li><a href="#queues" id="toc-queues"><span
+class="toc-section-number">3</span> Queues</a>
+<ul>
+<li><a href="#fifo-rule" id="toc-fifo-rule"><span
+class="toc-section-number">3.1</span> <code>FIFO</code> rule</a></li>
+<li><a href="#implementation-with-deque-python-type"
+id="toc-implementation-with-deque-python-type"><span
+class="toc-section-number">3.2</span> Implementation with
+<code>deque</code> python type</a></li>
+</ul></li>
+<li><a href="#tuples" id="toc-tuples"><span
+class="toc-section-number">4</span> Tuples</a>
+<ul>
+<li><a href="#different-ways-to-create-tuples"
+id="toc-different-ways-to-create-tuples"><span
+class="toc-section-number">4.1</span> Different ways to create
+tuples</a>
+<ul>
+<li><a href="#parenthesis-and-also-just-enumerating"
+id="toc-parenthesis-and-also-just-enumerating"><span
+class="toc-section-number">4.1.1</span> Parenthesis, and also just
+enumerating</a></li>
+<li><a href="#concatenation-with-operator"
+id="toc-concatenation-with-operator"><span
+class="toc-section-number">4.1.2</span> Concatenation with
+<code>+</code> operator</a></li>
+<li><a href="#repetition-with-operator"
+id="toc-repetition-with-operator"><span
+class="toc-section-number">4.1.3</span> Repetition with <code>*</code>
+operator</a></li>
+</ul></li>
+<li><a href="#tuple-function-to-convert-iterables-into-tuples"
+id="toc-tuple-function-to-convert-iterables-into-tuples"><span
+class="toc-section-number">4.2</span> <code>tuple()</code> function to
+convert iterables into tuples</a></li>
+<li><a href="#accessing-tuples" id="toc-accessing-tuples"><span
+class="toc-section-number">4.3</span> Accessing tuples</a>
+<ul>
+<li><a href="#accessing-a-single-item-with-square-brackets-operator"
+id="toc-accessing-a-single-item-with-square-brackets-operator"><span
+class="toc-section-number">4.3.1</span> Accessing a single item with
+square brackets <code>[]</code> operator</a></li>
+<li><a href="#accessing-a-range-of-items-with-colon-operator"
+id="toc-accessing-a-range-of-items-with-colon-operator"><span
+class="toc-section-number">4.3.2</span> Accessing a range of items with
+colon <code>:</code> operator</a></li>
+</ul></li>
+<li><a href="#unpacking-tuples-just-how-assignment-operator-works"
+id="toc-unpacking-tuples-just-how-assignment-operator-works"><span
+class="toc-section-number">4.4</span> Unpacking tuples, just how
+assignment <code>=</code> operator works</a></li>
+<li><a href="#operator-in-to-check-for-the-existance-of-an-item"
+id="toc-operator-in-to-check-for-the-existance-of-an-item"><span
+class="toc-section-number">4.5</span> Operator <code>in</code> to check
+for the existance of an item</a></li>
+</ul></li>
+<li><a href="#arrays" id="toc-arrays"><span
+class="toc-section-number">5</span> Arrays</a>
+<ul>
+<li><a href="#python-array-class" id="toc-python-array-class"><span
+class="toc-section-number">5.1</span> Python <code>array</code>
+class</a></li>
+<li><a href="#use-case" id="toc-use-case"><span
+class="toc-section-number">5.2</span> Use case</a></li>
+<li><a href="#array-function-to-create-an-array"
+id="toc-array-function-to-create-an-array"><span
+class="toc-section-number">5.3</span> <code>array()</code> function to
+create an array</a></li>
+</ul></li>
+<li><a href="#sets" id="toc-sets"><span
+class="toc-section-number">6</span> Sets</a>
+<ul>
+<li><a href="#different-way-for-creating-sets"
+id="toc-different-way-for-creating-sets"><span
+class="toc-section-number">6.1</span> Different way for creating
+sets</a>
+<ul>
+<li><a href="#with-curly-brackets" id="toc-with-curly-brackets"><span
+class="toc-section-number">6.1.1</span> With curly <code>{}</code>
+brackets</a></li>
+<li><a href="#using-the-set-function-feito"
+id="toc-using-the-set-function-feito"><span
+class="toc-section-number">6.1.2</span> Using the <code>set()</code>
+function (feito)</a></li>
+<li><a href="#with-a-comprehension-expression-cool"
+id="toc-with-a-comprehension-expression-cool"><span
+class="toc-section-number">6.1.3</span> With a
+<code>comprehension expression</code> (cool)</a></li>
+</ul></li>
+<li><a href="#using-set-function-to-convert-and-eliminate-duplicates"
+id="toc-using-set-function-to-convert-and-eliminate-duplicates"><span
+class="toc-section-number">6.2</span> Using <code>set()</code> function
+to convert and eliminate duplicates</a></li>
+<li><a href="#usual-add-remove-pop-etc.-methods-available"
+id="toc-usual-add-remove-pop-etc.-methods-available"><span
+class="toc-section-number">6.3</span> Usual <code>add()</code>,
+<code>remove()</code>, <code>pop()</code>, etc. methods
+available</a></li>
+<li><a href="#powerful-matematical-operations-with-sets"
+id="toc-powerful-matematical-operations-with-sets"><span
+class="toc-section-number">6.4</span> Powerful matematical operations
+with sets:</a>
+<ul>
+<li><a href="#union-operator" id="toc-union-operator"><span
+class="toc-section-number">6.4.1</span> Union, operator
+<code>|</code></a></li>
+<li><a href="#intersection-operator"
+id="toc-intersection-operator"><span
+class="toc-section-number">6.4.2</span> Intersection, operator
+<code>&amp;</code></a></li>
+<li><a href="#difference-operator--"
+id="toc-difference-operator--"><span
+class="toc-section-number">6.4.3</span> Difference, operator
+<code>-</code></a></li>
+<li><a href="#symmetric-difference-operator"
+id="toc-symmetric-difference-operator"><span
+class="toc-section-number">6.4.4</span> Symmetric difference, operator
+<code>^</code></a></li>
+</ul></li>
+<li><a
+href="#we-can-also-use-operator-in-to-check-the-existance-of-an-element"
+id="toc-we-can-also-use-operator-in-to-check-the-existance-of-an-element"><span
+class="toc-section-number">6.5</span> We can also use operator
+<code>in</code> to check the existance of an element</a></li>
+</ul></li>
+<li><a href="#dictionaries" id="toc-dictionaries"><span
+class="toc-section-number">7</span> Dictionaries</a>
+<ul>
+<li><a href="#ways-for-creating-a-dictionary"
+id="toc-ways-for-creating-a-dictionary"><span
+class="toc-section-number">7.1</span> Ways for creating a dictionary</a>
+<ul>
+<li><a href="#curly-brackets" id="toc-curly-brackets"><span
+class="toc-section-number">7.1.1</span> Curly <code>{}</code>
+brackets</a></li>
+<li><a href="#the-dict-function" id="toc-the-dict-function"><span
+class="toc-section-number">7.1.2</span> The <code>dict()</code>
+function</a></li>
+<li><a href="#a-comprehension-expression"
+id="toc-a-comprehension-expression"><span
+class="toc-section-number">7.1.3</span> A
+<code>comprehension expression</code></a></li>
+</ul></li>
+<li><a href="#accessing-dictionaries"
+id="toc-accessing-dictionaries"><span
+class="toc-section-number">7.2</span> Accessing dictionaries</a>
+<ul>
+<li><a href="#keys-not-indexes" id="toc-keys-not-indexes"><span
+class="toc-section-number">7.2.1</span> Keys, not indexes</a></li>
+<li><a href="#adding-new-keys" id="toc-adding-new-keys"><span
+class="toc-section-number">7.2.2</span> Adding new keys</a></li>
+<li><a href="#deleting-an-item-with-del-statement"
+id="toc-deleting-an-item-with-del-statement"><span
+class="toc-section-number">7.2.3</span> Deleting an item with
+<code>del</code> statement</a></li>
+<li><a href="#operator-in-or-get-method-to-avoid-key-access-error"
+id="toc-operator-in-or-get-method-to-avoid-key-access-error"><span
+class="toc-section-number">7.2.4</span> Operator <code>in</code> or
+<code>get()</code> method to avoid key access error</a></li>
+<li><a href="#how-to-loop-over-dictionaries"
+id="toc-how-to-loop-over-dictionaries"><span
+class="toc-section-number">7.2.5</span> How to <code>loop</code> over
+dictionaries</a>
+<ul>
+<li><a href="#a-standard-for-to-get-only-the-keys"
+id="toc-a-standard-for-to-get-only-the-keys"><span
+class="toc-section-number">7.2.5.1</span> A standard <code>for</code> to
+get only the keys</a></li>
+<li><a
+href="#combining-the-for-loop-with-the-items-method-with-or-without-unpacking"
+id="toc-combining-the-for-loop-with-the-items-method-with-or-without-unpacking"><span
+class="toc-section-number">7.2.5.2</span> Combining the <code>for</code>
+loop with the <code>items()</code> method, with or without
+unpacking</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><a href="#generator-objects" id="toc-generator-objects"><span
+class="toc-section-number">8</span> Generator objects</a>
+<ul>
+<li><a href="#how-to-create-a-generator-object"
+id="toc-how-to-create-a-generator-object"><span
+class="toc-section-number">8.1</span> How to create a generator
+object</a></li>
+<li><a href="#accessing-a-generator-object"
+id="toc-accessing-a-generator-object"><span
+class="toc-section-number">8.2</span> Accessing a generator object</a>
+<ul>
+<li><a href="#the-len-function-gives-an-error"
+id="toc-the-len-function-gives-an-error"><span
+class="toc-section-number">8.2.1</span> The ‘len()’ function gives an
+error</a></li>
+<li><a href="#we-must-iterate" id="toc-we-must-iterate"><span
+class="toc-section-number">8.2.2</span> We must iterate</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#unpacking-operator" id="toc-unpacking-operator"><span
+class="toc-section-number">9</span> Unpacking operator</a>
+<ul>
+<li><a href="#useful-applications" id="toc-useful-applications"><span
+class="toc-section-number">9.1</span> Useful applications</a>
+<ul>
+<li><a href="#printing-individual-items"
+id="toc-printing-individual-items"><span
+class="toc-section-number">9.1.1</span> Printing individual
+items</a></li>
+<li><a href="#creating-lists" id="toc-creating-lists"><span
+class="toc-section-number">9.1.2</span> Creating lists</a></li>
+<li><a href="#unpacking-dictionaries"
+id="toc-unpacking-dictionaries"><span
+class="toc-section-number">9.1.3</span> Unpacking dictionaries</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#excercise-most-repeated-character"
+id="toc-excercise-most-repeated-character"><span
+class="toc-section-number">10</span> Excercise: most repeated
+character</a>
+<ul>
+<li><a href="#my-first-attempt-with-a-dictionary."
+id="toc-my-first-attempt-with-a-dictionary."><span
+class="toc-section-number">10.1</span> My first attempt with a
+dictionary.</a></li>
+<li><a href="#another-implementation"
+id="toc-another-implementation"><span
+class="toc-section-number">10.2</span> Another implementation</a></li>
+</ul></li>
+<li><a href="#session-info." id="toc-session-info."><span
+class="toc-section-number">11</span> Session Info.</a></li>
+</ul>
+</div>
+
+<script>
+  addClassKlippyTo("pre.r, pre.python");
+  addKlippy('right', 'top', '#8B0000', '1', 'Click to copy', 'Done');
+</script>
+<hr />
+<div id="lists" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Lists</h1>
+<div id="different-ways-for-creating-lists" class="section level2"
+number="1.1">
+<h2><span class="header-section-number">1.1</span> Different ways for
+creating lists</h2>
+<div id="with-square-brackets" class="section level3" number="1.1.1">
+<h3><span class="header-section-number">1.1.1</span> With square
+brackets</h3>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>same_elements_list <span class="op">=</span> [[<span class="dv">0</span>] <span class="op">*</span> <span class="dv">5</span>, [<span class="dv">1</span>] <span class="op">*</span> <span class="dv">5</span>, [<span class="st">&quot;x&quot;</span>] <span class="op">*</span> <span class="dv">5</span>]</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Same elements list:</span><span class="sc">{</span>same_elements_list<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>Same elements list:[[0, 0, 0, 0, 0], [1, 1, 1, 1, 1], [&#39;x&#39;, &#39;x&#39;, &#39;x&#39;, &#39;x&#39;, &#39;x&#39;]]</code></pre>
+<!-- [⮉](#TOC)  [⤴](#TOC) -->
+<p><a href="#TOC">↺</a></p>
+</div>
+<div id="with-list-function" class="section level3" number="1.1.2">
+<h3><span class="header-section-number">1.1.2</span> With
+<code>list()</code> function</h3>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>sequence_of_numbers <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">20</span>))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;List of numbers with list() function:</span><span class="ch">\n</span><span class="sc">{</span>sequence_of_numbers<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>List of numbers with list() function:
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]</code></pre>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sequence_of_chars <span class="op">=</span> <span class="bu">list</span>(<span class="st">&quot;Christian A&quot;</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;List of characters with list() function:</span><span class="ch">\n</span><span class="sc">{</span>sequence_of_chars<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>List of characters with list() function:
+[&#39;C&#39;, &#39;h&#39;, &#39;r&#39;, &#39;i&#39;, &#39;s&#39;, &#39;t&#39;, &#39;i&#39;, &#39;a&#39;, &#39;n&#39;, &#39; &#39;, &#39;A&#39;]</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+<div id="with-unpacking-operator" class="section level3" number="1.1.3">
+<h3><span class="header-section-number">1.1.3</span> With unpacking
+<code>*</code> operator</h3>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>values <span class="op">=</span> [<span class="op">*</span><span class="bu">range</span>(<span class="dv">10</span>)]</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;List of numbers with unpacking operator:</span><span class="ch">\n</span><span class="sc">{</span>values<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>List of numbers with unpacking operator:
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</code></pre>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>letters <span class="op">=</span> [<span class="op">*</span><span class="st">&quot;Christian&quot;</span>]</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;List of characters with unpacking operator:</span><span class="ch">\n</span><span class="sc">{</span>letters<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>List of characters with unpacking operator:
+[&#39;C&#39;, &#39;h&#39;, &#39;r&#39;, &#39;i&#39;, &#39;s&#39;, &#39;t&#39;, &#39;i&#39;, &#39;a&#39;, &#39;n&#39;]</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+<div id="concatenations-without-the-operator" class="section level3"
+number="1.1.4">
+<h3><span class="header-section-number">1.1.4</span> Concatenations
+without the <code>+</code> operator</h3>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>mix1 <span class="op">=</span> [<span class="op">*</span><span class="bu">range</span>(<span class="dv">3</span>), <span class="st">&quot;Voila&quot;</span>]</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>mix2 <span class="op">=</span> [<span class="op">*</span><span class="bu">range</span>(<span class="dv">3</span>), <span class="op">*</span><span class="st">&quot;Voila&quot;</span>]</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>mix3 <span class="op">=</span> [<span class="op">*</span>values, <span class="st">&quot;&amp;&quot;</span>, <span class="op">*</span>letters]</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Concatenation without the + operator:</span><span class="ch">\n</span><span class="sc">{</span>mix1<span class="sc">}</span><span class="ch">\n</span><span class="sc">{</span>mix2<span class="sc">}</span><span class="ch">\n</span><span class="sc">{</span>mix3<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>Concatenation without the + operator:
+[0, 1, 2, &#39;Voila&#39;]
+[0, 1, 2, &#39;V&#39;, &#39;o&#39;, &#39;i&#39;, &#39;l&#39;, &#39;a&#39;]
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, &#39;&amp;&#39;, &#39;C&#39;, &#39;h&#39;, &#39;r&#39;, &#39;i&#39;, &#39;s&#39;, &#39;t&#39;, &#39;i&#39;, &#39;a&#39;, &#39;n&#39;]</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+<div id="using-append-method-in-a-traditional-for-loop"
+class="section level3" number="1.1.5">
+<h3><span class="header-section-number">1.1.5</span> Using
+<code>append()</code> method in a traditional <code>for</code> loop</h3>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>even_numbers_1 <span class="op">=</span> []</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    even_numbers_1.append(x <span class="op">*</span> <span class="dv">2</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(even_numbers_1)</span></code></pre></div>
+<pre><code>[0, 2, 4, 6, 8]</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+<div id="using-a-comprehension-expression" class="section level3"
+number="1.1.6">
+<h3><span class="header-section-number">1.1.6</span> Using a
+<code>comprehension expression</code></h3>
+<p>In python, a <code>comprehension expression</code> has this
+syntax:</p>
+<blockquote>
+<p>[expression <code>for</code> item <code>in</code> items]</p>
+</blockquote>
+<p>It means:</p>
+<ul>
+<li>We iterate over an iterable (items)<br />
+</li>
+<li>In each iteration we get an item<br />
+</li>
+<li>Then, we do something with it and return the result
+(expression)</li>
+</ul>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>even_numbers_2 <span class="op">=</span> [x <span class="op">*</span> <span class="dv">2</span> <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>)]</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(even_numbers_2)</span></code></pre></div>
+<pre><code>[0, 2, 4, 6, 8]</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+<div
+id="copying-totally-or-partially-or-inverting-a-list-with-the-colon-operator"
+class="section level3" number="1.1.7">
+<h3><span class="header-section-number">1.1.7</span> Copying totally or
+partially or inverting a list with the colon <code>:</code>
+operator</h3>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>copy_list <span class="op">=</span> sequence_of_numbers[:]</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Copy list:</span><span class="ch">\n</span><span class="sc">{</span>copy_list<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>Copy list:
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]</code></pre>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>even_elements_list <span class="op">=</span> sequence_of_numbers[::<span class="dv">2</span>]</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Even elements list:</span><span class="ch">\n</span><span class="sc">{</span>even_elements_list<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>Even elements list:
+[0, 2, 4, 6, 8, 10, 12, 14, 16, 18]</code></pre>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>inverted_list <span class="op">=</span> sequence_of_numbers[::<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Inverted list:</span><span class="ch">\n</span><span class="sc">{</span>inverted_list<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>Inverted list:
+[19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+</div>
+<div id="list-unpacking" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> List unpacking</h2>
+<div id="unpacking-all-elements" class="section level3" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> Unpacking all
+elements</h3>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>list_of_three_elements <span class="op">=</span> [<span class="st">&quot;s&quot;</span>, <span class="dv">7</span>, [<span class="dv">1</span>, <span class="st">&quot;b&quot;</span>]]</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>first, second, third <span class="op">=</span> list_of_three_elements</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;&quot;&quot;LIST UNPACKING</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="ss">          Complete list: </span><span class="sc">{</span>list_of_three_elements<span class="sc">}</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="ss">          Unpacked list:</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="ss">                1st element -&gt; </span><span class="sc">{</span>first<span class="sc">}</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="ss">                2nd element -&gt; </span><span class="sc">{</span>second<span class="sc">}</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="ss">                3rd element -&gt; </span><span class="sc">{</span>third<span class="sc">}</span><span class="ch">\n</span><span class="ss">&quot;&quot;&quot;</span>)</span></code></pre></div>
+<pre><code>LIST UNPACKING
+          Complete list: [&#39;s&#39;, 7, [1, &#39;b&#39;]]
+          Unpacked list:
+                1st element -&gt; s
+                2nd element -&gt; 7
+                3rd element -&gt; [1, &#39;b&#39;]</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+<div id="unpacking-the-initials-elements-and-packing-the-rest-of-them"
+class="section level3" number="1.2.2">
+<h3><span class="header-section-number">1.2.2</span> Unpacking the
+initials elements and packing the rest of them</h3>
+<div class="sourceCode" id="cb25"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>primero, segundo, <span class="op">*</span>resto <span class="op">=</span> sequence_of_chars</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;&quot;&quot;UNPACKING &amp; PACKING</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="ss">          Complete list: </span><span class="sc">{</span>sequence_of_chars<span class="sc">}</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="ss">          Unpacked first two elements:</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="ss">                1st element -&gt; </span><span class="sc">{</span>primero<span class="sc">}</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="ss">                2nd element -&gt; </span><span class="sc">{</span>segundo<span class="sc">}</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="ss">          Other elements packed:</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="ss">                others -&gt; </span><span class="sc">{</span>resto<span class="sc">}</span><span class="ss">&quot;&quot;&quot;</span>)</span></code></pre></div>
+<pre><code>UNPACKING &amp; PACKING
+          Complete list: [&#39;C&#39;, &#39;h&#39;, &#39;r&#39;, &#39;i&#39;, &#39;s&#39;, &#39;t&#39;, &#39;i&#39;, &#39;a&#39;, &#39;n&#39;, &#39; &#39;, &#39;A&#39;]
+          Unpacked first two elements:
+                1st element -&gt; C
+                2nd element -&gt; h
+          Other elements packed:
+                others -&gt; [&#39;r&#39;, &#39;i&#39;, &#39;s&#39;, &#39;t&#39;, &#39;i&#39;, &#39;a&#39;, &#39;n&#39;, &#39; &#39;, &#39;A&#39;]</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+<div
+id="unpacking-the-first-and-last-elements-and-packing-all-in-between"
+class="section level3" number="1.2.3">
+<h3><span class="header-section-number">1.2.3</span> Unpacking the first
+and last elements and packing all in between</h3>
+<div class="sourceCode" id="cb27"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>primer, <span class="op">*</span>intermedios, ultimo <span class="op">=</span> sequence_of_numbers</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;&quot;&quot;UNPACKING &amp; PACKING</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="ss">          Complete list: </span><span class="sc">{</span>sequence_of_numbers<span class="sc">}</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="ss">          Unpacked first and last elements:</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="ss">                1st  element -&gt; </span><span class="sc">{</span>primer<span class="sc">}</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="ss">                Last element -&gt; </span><span class="sc">{</span>ultimo<span class="sc">}</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="ss">          Intermidiate elements packed:</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="ss">                Between -&gt; </span><span class="sc">{</span>intermedios<span class="sc">}</span><span class="ss">&quot;&quot;&quot;</span>)</span></code></pre></div>
+<pre><code>UNPACKING &amp; PACKING
+          Complete list: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+          Unpacked first and last elements:
+                1st  element -&gt; 0
+                Last element -&gt; 19
+          Intermidiate elements packed:
+                Between -&gt; [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+</div>
+<div id="obtaning-indexes-orand-elements" class="section level2"
+number="1.3">
+<h2><span class="header-section-number">1.3</span> Obtaning indexes
+or/and elements</h2>
+<div
+id="obtaining-the-index-of-a-certain-element-of-a-list-with-the-index-method"
+class="section level3" number="1.3.1">
+<h3><span class="header-section-number">1.3.1</span> Obtaining the index
+of a certain element of a list with the <code>index()</code> method</h3>
+<div class="sourceCode" id="cb29"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>index_of_certain_element <span class="op">=</span> list_of_three_elements.index(<span class="dv">7</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;&quot;&quot;INDEX OF A CERTAIN VALUE OF A LIST</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="ss">Complete list: </span><span class="sc">{</span>list_of_three_elements<span class="sc">}</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="ss">Index of 7: </span><span class="sc">{</span>index_of_certain_element<span class="sc">}</span><span class="ss">&quot;&quot;&quot;</span>)</span></code></pre></div>
+<pre><code>INDEX OF A CERTAIN VALUE OF A LIST
+Complete list: [&#39;s&#39;, 7, [1, &#39;b&#39;]]
+Index of 7: 1</code></pre>
+<p>Better check to avoid <code>index() error</code>:</p>
+<div class="sourceCode" id="cb31"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">&quot;s&quot;</span> <span class="kw">in</span> list_of_three_elements:</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;Index of &#39;s&#39;: </span><span class="sc">{</span>list_of_three_elements<span class="sc">.</span>index(<span class="st">&#39;s&#39;</span>)<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>Index of &#39;s&#39;: 0</code></pre>
+<div class="sourceCode" id="cb33"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> list_of_three_elements.count(<span class="st">&quot;s&quot;</span>):</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;Index of &#39;s&#39;: </span><span class="sc">{</span>list_of_three_elements<span class="sc">.</span>index(<span class="st">&#39;s&#39;</span>)<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>Index of &#39;s&#39;: 0</code></pre>
+<div class="sourceCode" id="cb35"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">&quot;w&quot;</span> <span class="kw">in</span> list_of_three_elements:</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;Index of &#39;w&#39;: </span><span class="sc">{</span>list_of_three_elements<span class="sc">.</span>index(<span class="st">&#39;w&#39;</span>)<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;Element that not exist: just avoid index() error&quot;</span>)</span></code></pre></div>
+<pre><code>Element that not exist: just avoid index() error</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+<div
+id="obtaining-the-indexes-elements-of-a-list-with-the-enumerate-function"
+class="section level3" number="1.3.2">
+<h3><span class="header-section-number">1.3.2</span> Obtaining the
+indexes &amp; elements of a list with the <code>enumerate()</code>
+function</h3>
+<blockquote>
+<p><code>enumarate()</code> returns a tuple: (index, list_element)</p>
+</blockquote>
+<div class="sourceCode" id="cb37"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;&quot;&quot;INDEXES &amp; ELEMENTS OF A LIST</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="ss">Complete list: </span><span class="sc">{</span>list_of_three_elements<span class="sc">}</span><span class="ss">&quot;&quot;&quot;</span>)</span></code></pre></div>
+<pre><code>INDEXES &amp; ELEMENTS OF A LIST
+Complete list: [&#39;s&#39;, 7, [1, &#39;b&#39;]]</code></pre>
+<div class="sourceCode" id="cb39"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> index, element <span class="kw">in</span> <span class="bu">enumerate</span>(list_of_three_elements):</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;Index: </span><span class="sc">{</span>index<span class="sc">}</span><span class="ss">, Element: </span><span class="sc">{</span>element<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>Index: 0, Element: s
+Index: 1, Element: 7
+Index: 2, Element: [1, &#39;b&#39;]</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+</div>
+<div id="modifying-a-list" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> Modifying a list</h2>
+<div id="adding-elements-append-and-insert-methods"
+class="section level3" number="1.4.1">
+<h3><span class="header-section-number">1.4.1</span> Adding elements:
+<code>append()</code> and <code>insert()</code> methods</h3>
+<div class="sourceCode" id="cb41"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>original_list <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">5</span>))</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;APPENDING &amp; INSERTING</span><span class="ch">\n</span><span class="ss">Original list: </span><span class="sc">{</span>original_list<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>APPENDING &amp; INSERTING
+Original list: [0, 1, 2, 3, 4]</code></pre>
+<div class="sourceCode" id="cb43"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>original_list.append(<span class="st">&quot;-&quot;</span>)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;append() method: </span><span class="sc">{</span>original_list<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>append() method: [0, 1, 2, 3, 4, &#39;-&#39;]</code></pre>
+<div class="sourceCode" id="cb45"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>original_list.insert(<span class="dv">1</span>, <span class="st">&quot;-&quot;</span>)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;insert() method: </span><span class="sc">{</span>original_list<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>insert() method: [0, &#39;-&#39;, 1, 2, 3, 4, &#39;-&#39;]</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+<div id="removing-elements-pop-remove-and-clear-methods-del-construct"
+class="section level3" number="1.4.2">
+<h3><span class="header-section-number">1.4.2</span> Removing elements:
+<code>pop()</code>, <code>remove()</code> and <code>clear()</code>
+methods, <code>del</code> construct</h3>
+<div class="sourceCode" id="cb47"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Original list: </span><span class="sc">{</span>original_list<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>Original list: [0, &#39;-&#39;, 1, 2, 3, 4, &#39;-&#39;]</code></pre>
+<div class="sourceCode" id="cb49"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>original_list.pop()  <span class="co">## Extract the last element</span></span></code></pre></div>
+<pre><code>&#39;-&#39;</code></pre>
+<div class="sourceCode" id="cb51"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;After pop() method: </span><span class="sc">{</span>original_list<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>After pop() method: [0, &#39;-&#39;, 1, 2, 3, 4]</code></pre>
+<div class="sourceCode" id="cb53"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>original_list.pop(<span class="dv">2</span>)  <span class="co">## Extract by index</span></span></code></pre></div>
+<pre><code>1</code></pre>
+<div class="sourceCode" id="cb55"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;After pop(2) method: </span><span class="sc">{</span>original_list<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>After pop(2) method: [0, &#39;-&#39;, 2, 3, 4]</code></pre>
+<div class="sourceCode" id="cb57"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>original_list.remove(<span class="st">&quot;-&quot;</span>)  <span class="co">## Extract by value</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;After remove(&#39;-&#39;) method: </span><span class="sc">{</span>original_list<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>After remove(&#39;-&#39;) method: [0, 2, 3, 4]</code></pre>
+<div class="sourceCode" id="cb59"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="kw">del</span> original_list[<span class="dv">0</span>:<span class="dv">2</span>]  <span class="co">## Remove a range</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;After del construct: </span><span class="sc">{</span>original_list<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>After del construct: [3, 4]</code></pre>
+<div class="sourceCode" id="cb61"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>original_list.clear()  <span class="co">## Remove all elements</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;After clear() method: </span><span class="sc">{</span>original_list<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>After clear() method: []</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+</div>
+<div id="sorting-lists" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> Sorting lists</h2>
+<div id="sorted-function-and-sort-method" class="section level3"
+number="1.5.1">
+<h3><span class="header-section-number">1.5.1</span>
+<code>sorted()</code> function and <code>sort()</code> method</h3>
+<div class="sourceCode" id="cb63"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="op">=</span> [<span class="dv">7</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">9</span>, <span class="dv">51</span>, <span class="dv">18</span>, <span class="dv">7</span>]</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>letters <span class="op">=</span> [<span class="st">&quot;s&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;n&quot;</span>, <span class="st">&quot;t&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;q&quot;</span>, <span class="st">&quot;w&quot;</span>]</span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Original lists:</span><span class="ch">\n</span><span class="sc">{</span>numbers<span class="sc">}</span><span class="ch">\n</span><span class="sc">{</span>letters<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>Original lists:
+[7, 3, 4, 1, 5, 3, 9, 51, 18, 7]
+[&#39;s&#39;, &#39;b&#39;, &#39;n&#39;, &#39;t&#39;, &#39;a&#39;, &#39;q&#39;, &#39;w&#39;]</code></pre>
+<div class="sourceCode" id="cb65"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>new_sorted_numbers <span class="op">=</span> <span class="bu">sorted</span>(numbers)</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>new_sorted_letters <span class="op">=</span> <span class="bu">sorted</span>(letters)</span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;New lists with sorted():</span><span class="ch">\n</span><span class="sc">{</span>new_sorted_numbers<span class="sc">}</span><span class="ch">\n</span><span class="sc">{</span>new_sorted_letters<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>    </span></code></pre></div>
+<pre><code>New lists with sorted():
+[1, 3, 3, 4, 5, 7, 7, 9, 18, 51]
+[&#39;a&#39;, &#39;b&#39;, &#39;n&#39;, &#39;q&#39;, &#39;s&#39;, &#39;t&#39;, &#39;w&#39;]</code></pre>
+<div class="sourceCode" id="cb67"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>new_reverse_sorted_numbers <span class="op">=</span> <span class="bu">sorted</span>(numbers, reverse<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>new_reverse_sorted_letters <span class="op">=</span> <span class="bu">sorted</span>(letters, reverse<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;New lists with sorted(reverse=True):</span><span class="ch">\n</span><span class="sc">{</span>new_reverse_sorted_numbers<span class="sc">}</span><span class="ch">\n</span><span class="sc">{</span>new_reverse_sorted_letters<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>New lists with sorted(reverse=True):
+[51, 18, 9, 7, 7, 5, 4, 3, 3, 1]
+[&#39;w&#39;, &#39;t&#39;, &#39;s&#39;, &#39;q&#39;, &#39;n&#39;, &#39;b&#39;, &#39;a&#39;]</code></pre>
+<div class="sourceCode" id="cb69"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>numbers.sort()</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Original list modified by sort():</span><span class="ch">\n</span><span class="sc">{</span>numbers<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>Original list modified by sort():
+[1, 3, 3, 4, 5, 7, 7, 9, 18, 51]</code></pre>
+<div class="sourceCode" id="cb71"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>letters.sort(reverse<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Original list modified by sort(reverse=True):</span><span class="ch">\n</span><span class="sc">{</span>letters<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>Original list modified by sort(reverse=True):
+[&#39;w&#39;, &#39;t&#39;, &#39;s&#39;, &#39;q&#39;, &#39;n&#39;, &#39;b&#39;, &#39;a&#39;]</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+<div id="sorting-a-list-of-tuples-key-parameter-of-sorted-and-sort"
+class="section level3" number="1.5.2">
+<h3><span class="header-section-number">1.5.2</span> Sorting a list of
+tuples: <em>key parameter</em> of <code>sorted()</code> and
+<code>sort()</code></h3>
+<div class="sourceCode" id="cb73"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>products <span class="op">=</span> [</span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;Product1&quot;</span>, <span class="dv">10</span>),</span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;Product2&quot;</span>, <span class="dv">3</span>),</span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;Product3&quot;</span>, <span class="dv">7</span>),</span>
+<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a>clients <span class="op">=</span> [</span>
+<span id="cb73-7"><a href="#cb73-7" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;James&quot;</span>, <span class="dv">48</span>),</span>
+<span id="cb73-8"><a href="#cb73-8" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;Albert&quot;</span>, <span class="dv">72</span>),</span>
+<span id="cb73-9"><a href="#cb73-9" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;Peter&quot;</span>, <span class="dv">13</span>),</span>
+<span id="cb73-10"><a href="#cb73-10" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb73-11"><a href="#cb73-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Original lists:</span><span class="ch">\n</span><span class="sc">{</span>products<span class="sc">}</span><span class="ch">\n</span><span class="sc">{</span>clients<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>Original lists:
+[(&#39;Product1&#39;, 10), (&#39;Product2&#39;, 3), (&#39;Product3&#39;, 7)]
+[(&#39;James&#39;, 48), (&#39;Albert&#39;, 72), (&#39;Peter&#39;, 13)]</code></pre>
+<p><a href="#TOC">↺</a></p>
+<div id="sorting-with-a-reference-to-a-explicit-function-as-a-key"
+class="section level4" number="1.5.2.1">
+<h4><span class="header-section-number">1.5.2.1</span> Sorting with a
+<strong>reference</strong> to a <strong>explicit function</strong> as a
+key</h4>
+<div class="sourceCode" id="cb75"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> key_for_sorting_by_price(product):  <span class="co">## function definition</span></span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> product[<span class="dv">1</span>]</span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a>products_sorted_by_price <span class="op">=</span> <span class="bu">sorted</span>(</span>
+<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a>    products,</span>
+<span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a>    key<span class="op">=</span>key_for_sorting_by_price)  <span class="co">## key=only_the_reference</span></span>
+<span id="cb75-7"><a href="#cb75-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;New list by price with sorted():</span><span class="ch">\n</span><span class="sc">{</span>products_sorted_by_price<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>New list by price with sorted():
+[(&#39;Product2&#39;, 3), (&#39;Product3&#39;, 7), (&#39;Product1&#39;, 10)]</code></pre>
+<div class="sourceCode" id="cb77"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>products.sort(key<span class="op">=</span>key_for_sorting_by_price)  <span class="co">## key=only_the_reference</span></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Original list modified by price with sort():</span><span class="ch">\n</span><span class="sc">{</span>products<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>Original list modified by price with sort():
+[(&#39;Product2&#39;, 3), (&#39;Product3&#39;, 7), (&#39;Product1&#39;, 10)]</code></pre>
+<div class="sourceCode" id="cb79"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>products.sort(key<span class="op">=</span>key_for_sorting_by_price, reverse<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Original list modified by price with sort(reversed):</span><span class="ch">\n</span><span class="sc">{</span>products<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>Original list modified by price with sort(reversed):
+[(&#39;Product1&#39;, 10), (&#39;Product3&#39;, 7), (&#39;Product2&#39;, 3)]</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+<div id="sorting-with-a-lambda-or-anonimous-function-as-a-key"
+class="section level4" number="1.5.2.2">
+<h4><span class="header-section-number">1.5.2.2</span> Sorting with a
+<code>lambda</code> (or anonimous) function as a key</h4>
+<blockquote>
+<p>A <code>lambda</code> function does not have a name, and has this
+definition:<br />
+<code>lambda parameters: expression</code></p>
+</blockquote>
+<div class="sourceCode" id="cb81"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>products.sort(key<span class="op">=</span><span class="kw">lambda</span> product: product[<span class="dv">1</span>])</span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Original list modified by price with sort():</span><span class="ch">\n</span><span class="sc">{</span>products<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>Original list modified by price with sort():
+[(&#39;Product2&#39;, 3), (&#39;Product3&#39;, 7), (&#39;Product1&#39;, 10)]</code></pre>
+<div class="sourceCode" id="cb83"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>clients_sorted_by_age <span class="op">=</span> <span class="bu">sorted</span>(clients, key<span class="op">=</span><span class="kw">lambda</span> client: client[<span class="dv">1</span>])</span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;New list by age with sorted():</span><span class="ch">\n</span><span class="sc">{</span>clients_sorted_by_age<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>New list by age with sorted():
+[(&#39;Peter&#39;, 13), (&#39;James&#39;, 48), (&#39;Albert&#39;, 72)]</code></pre>
+<div class="sourceCode" id="cb85"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>clients_sorted_by_name <span class="op">=</span> <span class="bu">sorted</span>(clients, key<span class="op">=</span><span class="kw">lambda</span> client: client[<span class="dv">0</span>])</span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;New list by name with sorted():</span><span class="ch">\n</span><span class="sc">{</span>clients_sorted_by_name<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>New list by name with sorted():
+[(&#39;Albert&#39;, 72), (&#39;James&#39;, 48), (&#39;Peter&#39;, 13)]</code></pre>
+<div class="sourceCode" id="cb87"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>clients.sort(key<span class="op">=</span><span class="kw">lambda</span> client: client[<span class="dv">1</span>], reverse<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Original list modified by age with sort(reversed):</span><span class="ch">\n</span><span class="sc">{</span>clients<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>Original list modified by age with sort(reversed):
+[(&#39;Albert&#39;, 72), (&#39;James&#39;, 48), (&#39;Peter&#39;, 13)]</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+</div>
+</div>
+<div id="mapping-a-list-of-tuples-into-another-list"
+class="section level2" number="1.6">
+<h2><span class="header-section-number">1.6</span> Mapping a list of
+tuples into another list</h2>
+<div class="sourceCode" id="cb89"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>books <span class="op">=</span> [</span>
+<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;Aristoteles&quot;</span>, <span class="dv">10</span>),</span>
+<span id="cb89-3"><a href="#cb89-3" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;Einstein&quot;</span>, <span class="dv">3</span>),</span>
+<span id="cb89-4"><a href="#cb89-4" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;Leibniz&quot;</span>, <span class="dv">7</span>),</span>
+<span id="cb89-5"><a href="#cb89-5" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb89-6"><a href="#cb89-6" aria-hidden="true" tabindex="-1"></a>prices_of_books <span class="op">=</span> []</span>
+<span id="cb89-7"><a href="#cb89-7" aria-hidden="true" tabindex="-1"></a>names_of_books <span class="op">=</span> []</span>
+<span id="cb89-8"><a href="#cb89-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-9"><a href="#cb89-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;&quot;&quot;</span></span>
+<span id="cb89-10"><a href="#cb89-10" aria-hidden="true" tabindex="-1"></a><span class="ss">Original lists:</span></span>
+<span id="cb89-11"><a href="#cb89-11" aria-hidden="true" tabindex="-1"></a><span class="ss">    books &amp; prices: </span><span class="sc">{</span>books<span class="sc">}</span></span>
+<span id="cb89-12"><a href="#cb89-12" aria-hidden="true" tabindex="-1"></a><span class="ss">    books&#39; prices: </span><span class="sc">{</span>prices_of_books<span class="sc">}</span></span>
+<span id="cb89-13"><a href="#cb89-13" aria-hidden="true" tabindex="-1"></a><span class="ss">    books&#39; names: </span><span class="sc">{</span>names_of_books<span class="sc">}</span></span>
+<span id="cb89-14"><a href="#cb89-14" aria-hidden="true" tabindex="-1"></a><span class="ss">&quot;&quot;&quot;</span>)</span></code></pre></div>
+<pre><code>
+Original lists:
+    books &amp; prices: [(&#39;Aristoteles&#39;, 10), (&#39;Einstein&#39;, 3), (&#39;Leibniz&#39;, 7)]
+    books&#39; prices: []
+    books&#39; names: []</code></pre>
+<p><a href="#TOC">↺</a></p>
+<div id="using-append-in-a-traditional-for-loop" class="section level3"
+number="1.6.1">
+<h3><span class="header-section-number">1.6.1</span> Using
+<code>append()</code> in a traditional <code>for</code> loop</h3>
+<div class="sourceCode" id="cb91"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> book <span class="kw">in</span> books:</span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>    prices_of_books.append(book[<span class="dv">1</span>])</span>
+<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;New list of book&#39;s prices:</span><span class="ch">\n</span><span class="sc">{</span>prices_of_books<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>New list of book&#39;s prices:
+[10, 3, 7]</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+<div id="using-map-and-lambda-functions" class="section level3"
+number="1.6.2">
+<h3><span class="header-section-number">1.6.2</span> Using
+<code>map()</code> and <code>lambda</code> functions</h3>
+<div class="sourceCode" id="cb93"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>names_of_books <span class="op">=</span> <span class="bu">map</span>(<span class="kw">lambda</span> book: book[<span class="dv">1</span>], books)</span></code></pre></div>
+<div id="printing-a-map-object" class="section level4" number="1.6.2.1">
+<h4><span class="header-section-number">1.6.2.1</span> Printing a
+<code>map</code> object</h4>
+<p>As <code>map()</code> returns a <code>map</code> object that is
+<code>iterable</code>, we have to loop over it in order to print its
+elements</p>
+<div class="sourceCode" id="cb94"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name <span class="kw">in</span> names_of_books:</span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(name)</span></code></pre></div>
+<pre><code>10
+3
+7</code></pre>
+<p>But we can convert the <code>map</code> object into a
+<code>list</code></p>
+<div class="sourceCode" id="cb96"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>names_of_books <span class="op">=</span> <span class="bu">list</span>(<span class="bu">map</span>(<span class="kw">lambda</span> book: book[<span class="dv">1</span>], books))</span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(names_of_books)</span></code></pre></div>
+<pre><code>[10, 3, 7]</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+</div>
+</div>
+<div id="filtering-a-list" class="section level2" number="1.7">
+<h2><span class="header-section-number">1.7</span> Filtering a list</h2>
+<div class="sourceCode" id="cb98"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>cars <span class="op">=</span> [</span>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;Tesla&quot;</span>, <span class="dv">5000</span>),</span>
+<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;Ford&quot;</span>, <span class="dv">2500</span>),</span>
+<span id="cb98-4"><a href="#cb98-4" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;Nissan&quot;</span>, <span class="dv">3200</span>),</span>
+<span id="cb98-5"><a href="#cb98-5" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb98-6"><a href="#cb98-6" aria-hidden="true" tabindex="-1"></a>expensive_cars <span class="op">=</span> []</span>
+<span id="cb98-7"><a href="#cb98-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb98-8"><a href="#cb98-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;&quot;&quot;</span></span>
+<span id="cb98-9"><a href="#cb98-9" aria-hidden="true" tabindex="-1"></a><span class="ss">Original list</span></span>
+<span id="cb98-10"><a href="#cb98-10" aria-hidden="true" tabindex="-1"></a><span class="ss">    cars: </span><span class="sc">{</span>cars<span class="sc">}</span></span>
+<span id="cb98-11"><a href="#cb98-11" aria-hidden="true" tabindex="-1"></a><span class="ss">    expensive cars: </span><span class="sc">{</span>expensive_cars<span class="sc">}</span></span>
+<span id="cb98-12"><a href="#cb98-12" aria-hidden="true" tabindex="-1"></a><span class="ss">&quot;&quot;&quot;</span>)</span></code></pre></div>
+<pre><code>
+Original list
+    cars: [(&#39;Tesla&#39;, 5000), (&#39;Ford&#39;, 2500), (&#39;Nissan&#39;, 3200)]
+    expensive cars: []</code></pre>
+<p><a href="#TOC">↺</a></p>
+<div id="using-if-and-append-in-a-traditional-for-loop"
+class="section level3" number="1.7.1">
+<h3><span class="header-section-number">1.7.1</span> Using
+<code>if</code> and <code>append()</code> in a traditional
+<code>for</code> loop</h3>
+<div class="sourceCode" id="cb100"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> car <span class="kw">in</span> cars:</span>
+<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> car[<span class="dv">1</span>] <span class="op">&gt;=</span> <span class="dv">3000</span>:</span>
+<span id="cb100-3"><a href="#cb100-3" aria-hidden="true" tabindex="-1"></a>        expensive_cars.append(car)</span>
+<span id="cb100-4"><a href="#cb100-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(expensive_cars)</span></code></pre></div>
+<pre><code>[(&#39;Tesla&#39;, 5000), (&#39;Nissan&#39;, 3200)]</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+<div id="using-filter-and-lambda-functions" class="section level3"
+number="1.7.2">
+<h3><span class="header-section-number">1.7.2</span> Using
+<code>filter()</code> and <code>lambda</code> functions</h3>
+<div class="sourceCode" id="cb102"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a>expensive_cars <span class="op">=</span> <span class="bu">filter</span>(<span class="kw">lambda</span> car: car[<span class="dv">1</span>] <span class="op">&gt;=</span> <span class="dv">3000</span>, cars)</span></code></pre></div>
+<div id="printing-a-filter-object" class="section level4"
+number="1.7.2.1">
+<h4><span class="header-section-number">1.7.2.1</span> Printing a
+<code>filter</code> object</h4>
+<p>As <code>map()</code>, <code>filter()</code> also returns a
+<code>filter</code> object that is <code>iterable</code>.</p>
+<p>So we have to loop over it in order to print its elements</p>
+<div class="sourceCode" id="cb103"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> car <span class="kw">in</span> expensive_cars:</span>
+<span id="cb103-2"><a href="#cb103-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(car)</span>
+<span id="cb103-3"><a href="#cb103-3" aria-hidden="true" tabindex="-1"></a>    </span></code></pre></div>
+<pre><code>(&#39;Tesla&#39;, 5000)
+(&#39;Nissan&#39;, 3200)</code></pre>
+<p>Or we just convert the <code>filter</code> object into a
+<code>list</code></p>
+<div class="sourceCode" id="cb105"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a>expensive_cars <span class="op">=</span> <span class="bu">filter</span>(<span class="kw">lambda</span> car: car[<span class="dv">1</span>] <span class="op">&gt;=</span> <span class="dv">3000</span>, cars)</span>
+<span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">list</span>(expensive_cars))</span></code></pre></div>
+<pre><code>[(&#39;Tesla&#39;, 5000), (&#39;Nissan&#39;, 3200)]</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+</div>
+</div>
+<div
+id="the-preferred-way-to-map-and-filter-lists-in-python-comunity-list-comprehensions"
+class="section level2" number="1.8">
+<h2><span class="header-section-number">1.8</span> The preferred way to
+map and filter lists in python comunity: <strong>list
+comprehensions</strong></h2>
+<p>Using list comprehensions is a cleanear and more readable way of
+mapping and filtering.</p>
+<blockquote>
+<p><strong>List comprehensions</strong> are a feature in python with
+this syntax.<br />
+1. First, we put the square brackets for defining a list.<br />
+2. Then we write a <code>comprehension expression</code> inside:</p>
+</blockquote>
+<blockquote>
+<p>A <code>comprehension expression</code>, as we saw, is:<br />
+[expression <code>for</code> item <code>in</code> items], which
+means</p>
+<ul>
+<li>We iterate over an iterable (items)<br />
+</li>
+<li>In each iteration we get an item<br />
+</li>
+<li>Then, we do something with it and return the result
+(expression)</li>
+</ul>
+</blockquote>
+<div class="sourceCode" id="cb107"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a>books <span class="op">=</span> [</span>
+<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;Aristoteles&quot;</span>, <span class="dv">10</span>),</span>
+<span id="cb107-3"><a href="#cb107-3" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;Einstein&quot;</span>, <span class="dv">3</span>),</span>
+<span id="cb107-4"><a href="#cb107-4" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;Leibniz&quot;</span>, <span class="dv">7</span>),</span>
+<span id="cb107-5"><a href="#cb107-5" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb107-6"><a href="#cb107-6" aria-hidden="true" tabindex="-1"></a>prices_of_books_map_way <span class="op">=</span> []</span>
+<span id="cb107-7"><a href="#cb107-7" aria-hidden="true" tabindex="-1"></a>prices_of_books_python_way <span class="op">=</span> []</span>
+<span id="cb107-8"><a href="#cb107-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-9"><a href="#cb107-9" aria-hidden="true" tabindex="-1"></a>cars <span class="op">=</span> [</span>
+<span id="cb107-10"><a href="#cb107-10" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;Tesla&quot;</span>, <span class="dv">5000</span>),</span>
+<span id="cb107-11"><a href="#cb107-11" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;Ford&quot;</span>, <span class="dv">2500</span>),</span>
+<span id="cb107-12"><a href="#cb107-12" aria-hidden="true" tabindex="-1"></a>    (<span class="st">&quot;Nissan&quot;</span>, <span class="dv">3200</span>),</span>
+<span id="cb107-13"><a href="#cb107-13" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb107-14"><a href="#cb107-14" aria-hidden="true" tabindex="-1"></a>expensive_cars_filter_way <span class="op">=</span> []</span>
+<span id="cb107-15"><a href="#cb107-15" aria-hidden="true" tabindex="-1"></a>expensive_cars_python_way <span class="op">=</span> []</span>
+<span id="cb107-16"><a href="#cb107-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb107-17"><a href="#cb107-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Original list of books:</span><span class="ch">\n</span><span class="sc">{</span>books<span class="sc">}</span><span class="ch">\n</span><span class="ss">Original list of cars:</span><span class="ch">\n</span><span class="sc">{</span>cars<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>Original list of books:
+[(&#39;Aristoteles&#39;, 10), (&#39;Einstein&#39;, 3), (&#39;Leibniz&#39;, 7)]
+Original list of cars:
+[(&#39;Tesla&#39;, 5000), (&#39;Ford&#39;, 2500), (&#39;Nissan&#39;, 3200)]</code></pre>
+<p><a href="#TOC">↺</a></p>
+<div
+id="comparing-the-functional-programming-way-map-and-filter-vs-the-python-way-comprehension-expression"
+class="section level3" number="1.8.1">
+<h3><span class="header-section-number">1.8.1</span> Comparing the
+functional programming way (<code>map</code> and <code>filter</code>) vs
+the python way (<code>comprehension expression</code>)</h3>
+<div class="sourceCode" id="cb109"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a>prices_of_books_map_way <span class="op">=</span> <span class="bu">list</span>(<span class="bu">map</span>(<span class="kw">lambda</span> book: book[<span class="dv">1</span>], books))</span>
+<span id="cb109-2"><a href="#cb109-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;map way:</span><span class="ch">\n</span><span class="sc">{</span>prices_of_books_map_way<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>map way:
+[10, 3, 7]</code></pre>
+<div class="sourceCode" id="cb111"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a>prices_of_books_python_way <span class="op">=</span> [book[<span class="dv">1</span>] <span class="cf">for</span> book <span class="kw">in</span> books]</span>
+<span id="cb111-2"><a href="#cb111-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;list comprehension way:</span><span class="ch">\n</span><span class="sc">{</span>prices_of_books_python_way<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>list comprehension way:
+[10, 3, 7]</code></pre>
+<div class="sourceCode" id="cb113"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a>expensive_cars_filter_way <span class="op">=</span> <span class="bu">list</span>(<span class="bu">filter</span>(<span class="kw">lambda</span> car: car[<span class="dv">1</span>] <span class="op">&gt;=</span> <span class="dv">3000</span>, cars))</span>
+<span id="cb113-2"><a href="#cb113-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;filter way:</span><span class="ch">\n</span><span class="sc">{</span>expensive_cars_filter_way<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>filter way:
+[(&#39;Tesla&#39;, 5000), (&#39;Nissan&#39;, 3200)]</code></pre>
+<div class="sourceCode" id="cb115"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a>expensive_cars_python_way <span class="op">=</span> [car <span class="cf">for</span> car <span class="kw">in</span> cars <span class="cf">if</span> car[<span class="dv">1</span>] <span class="op">&gt;=</span> <span class="dv">3000</span>]</span>
+<span id="cb115-2"><a href="#cb115-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;list comprehension way:</span><span class="ch">\n</span><span class="sc">{</span>expensive_cars_python_way<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>list comprehension way:
+[(&#39;Tesla&#39;, 5000), (&#39;Nissan&#39;, 3200)]</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+</div>
+<div id="combining-multiple-lists-of-same-length-zip-function"
+class="section level2" number="1.9">
+<h2><span class="header-section-number">1.9</span> Combining multiple
+lists of same length: <code>zip()</code> function</h2>
+<p>A <code>list comprehension</code>, as well as <code>map()</code> and
+<code>filter()</code>, works only with <strong>one list</strong>.</p>
+<p>So, in order to combine <strong>multiple lists (with same number of
+elements)</strong> we can use the built in <code>zip()</code>
+function.</p>
+<blockquote>
+<p><code>zip()</code> creates a new list of tupples, where every tupple
+is the combination of the elements of same order from the input
+lists</p>
+</blockquote>
+<div class="sourceCode" id="cb117"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a>list_of_numbers <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">5</span>))</span>
+<span id="cb117-2"><a href="#cb117-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;List of numbers:</span><span class="ch">\n</span><span class="sc">{</span>list_of_numbers<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>List of numbers:
+[0, 1, 2, 3, 4]</code></pre>
+<div class="sourceCode" id="cb119"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a>list_of_char <span class="op">=</span> <span class="bu">list</span>(<span class="st">&quot;Holas&quot;</span>)</span>
+<span id="cb119-2"><a href="#cb119-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;List of characters:</span><span class="ch">\n</span><span class="sc">{</span>list_of_char<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>List of characters:
+[&#39;H&#39;, &#39;o&#39;, &#39;l&#39;, &#39;a&#39;, &#39;s&#39;]</code></pre>
+<div class="sourceCode" id="cb121"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a>some_string <span class="op">=</span> <span class="st">&quot;Manol&quot;</span></span>
+<span id="cb121-2"><a href="#cb121-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Some string:</span><span class="ch">\n</span><span class="sc">{</span>some_string<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>Some string:
+Manol</code></pre>
+<div class="sourceCode" id="cb123"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a>zipped_list <span class="op">=</span> <span class="bu">list</span>(<span class="bu">zip</span>(list_of_numbers, list_of_char, some_string))</span></code></pre></div>
+<p>We could print the combined list like this:</p>
+<div class="sourceCode" id="cb124"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;</span><span class="ch">\n</span><span class="ss">New list with ZIP() function:</span><span class="ch">\n</span><span class="sc">{</span>zipped_list<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>
+New list with ZIP() function:
+[(0, &#39;H&#39;, &#39;M&#39;), (1, &#39;o&#39;, &#39;a&#39;), (2, &#39;l&#39;, &#39;n&#39;), (3, &#39;a&#39;, &#39;o&#39;), (4, &#39;s&#39;, &#39;l&#39;)]</code></pre>
+<p>Or like this:</p>
+<div class="sourceCode" id="cb126"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> item <span class="kw">in</span> zipped_list:</span>
+<span id="cb126-2"><a href="#cb126-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(item)</span></code></pre></div>
+<pre><code>(0, &#39;H&#39;, &#39;M&#39;)
+(1, &#39;o&#39;, &#39;a&#39;)
+(2, &#39;l&#39;, &#39;n&#39;)
+(3, &#39;a&#39;, &#39;o&#39;)
+(4, &#39;s&#39;, &#39;l&#39;)</code></pre>
+<p><a href="#TOC">↺</a></p>
+<hr />
+</div>
+</div>
+<div id="stacks" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Stacks</h1>
+<div id="lifo-rule" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> <code>LIFO</code>
+rule</h2>
+<p>An object behaves as a <strong><em>stack</em></strong>, if it follows
+the <code>LIFO</code> rule</p>
+<blockquote>
+<p><strong>Last In First Out:</strong> the last element is the one to be
+removed</p>
+</blockquote>
+</div>
+<div id="implementation-with-lists" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Implementation with
+<code>list</code>s</h2>
+<p>We can easily and efficiently implement a stack with a
+<code>list</code>:</p>
+<div class="sourceCode" id="cb128"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a>browsing_session <span class="op">=</span> []           <span class="co"># Stack of browsing history</span></span>
+<span id="cb128-2"><a href="#cb128-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-3"><a href="#cb128-3" aria-hidden="true" tabindex="-1"></a>browsing_session.append(<span class="dv">1</span>)      <span class="co"># Pages visited</span></span>
+<span id="cb128-4"><a href="#cb128-4" aria-hidden="true" tabindex="-1"></a>browsing_session.append(<span class="dv">2</span>)</span>
+<span id="cb128-5"><a href="#cb128-5" aria-hidden="true" tabindex="-1"></a>browsing_session.append(<span class="dv">3</span>)</span>
+<span id="cb128-6"><a href="#cb128-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-7"><a href="#cb128-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(browsing_session)</span></code></pre></div>
+<pre><code>[1, 2, 3]</code></pre>
+<div class="sourceCode" id="cb130"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb130-1"><a href="#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> browsing_session:            <span class="co"># Back button pressed</span></span>
+<span id="cb130-2"><a href="#cb130-2" aria-hidden="true" tabindex="-1"></a>    last <span class="op">=</span> browsing_session.pop()</span>
+<span id="cb130-3"><a href="#cb130-3" aria-hidden="true" tabindex="-1"></a>    previous <span class="op">=</span> browsing_session[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb130-4"><a href="#cb130-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;Redirected from </span><span class="sc">{</span>last<span class="sc">}</span><span class="ss"> to </span><span class="sc">{</span>previous<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>Redirected from 3 to 2</code></pre>
+<div class="sourceCode" id="cb132"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(browsing_session)</span></code></pre></div>
+<pre><code>[1, 2]</code></pre>
+<p><a href="#TOC">↺</a></p>
+<hr />
+</div>
+</div>
+<div id="queues" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Queues</h1>
+<div id="fifo-rule" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> <code>FIFO</code>
+rule</h2>
+<p>An object behaves as a <strong><em>queue</em></strong>, if it follows
+the <code>FIFO</code> rule.</p>
+<blockquote>
+<p><strong>First In First Out:</strong> the first element is that to be
+removed</p>
+</blockquote>
+</div>
+<div id="implementation-with-deque-python-type" class="section level2"
+number="3.2">
+<h2><span class="header-section-number">3.2</span> Implementation with
+<code>deque</code> python type</h2>
+<p>Implementing a queue with a <code>list</code> is <strong><em>not
+efficient</em></strong>, because removing the first element from a large
+list implies shifting “to the left”, i.e., moving in memory, all the
+other items.</p>
+<p>So in python we use a <code>deque</code> object, importing
+<code>deque</code> class from <code>collections</code> module.</p>
+<blockquote>
+<p>A <code>deque</code> object has <strong>similar methods</strong> than
+a <code>list</code> object.</p>
+<ul>
+<li>The usual append()<br />
+</li>
+<li>And, of course, a popleft() method</li>
+</ul>
+</blockquote>
+<div class="sourceCode" id="cb134"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> deque</span>
+<span id="cb134-2"><a href="#cb134-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb134-3"><a href="#cb134-3" aria-hidden="true" tabindex="-1"></a>queue <span class="op">=</span> deque([])               <span class="co"># We wrap a list within a deque object.</span></span>
+<span id="cb134-4"><a href="#cb134-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb134-5"><a href="#cb134-5" aria-hidden="true" tabindex="-1"></a>queue.append(<span class="dv">1</span>)</span>
+<span id="cb134-6"><a href="#cb134-6" aria-hidden="true" tabindex="-1"></a>queue.append(<span class="dv">2</span>)</span>
+<span id="cb134-7"><a href="#cb134-7" aria-hidden="true" tabindex="-1"></a>queue.append(<span class="dv">3</span>)</span>
+<span id="cb134-8"><a href="#cb134-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb134-9"><a href="#cb134-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(queue)</span></code></pre></div>
+<pre><code>deque([1, 2, 3])</code></pre>
+<div class="sourceCode" id="cb136"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb136-1"><a href="#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> queue:</span>
+<span id="cb136-2"><a href="#cb136-2" aria-hidden="true" tabindex="-1"></a>    first <span class="op">=</span> queue.popleft()</span>
+<span id="cb136-3"><a href="#cb136-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;First element removed: </span><span class="sc">{</span>first<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>First element removed: 1</code></pre>
+<div class="sourceCode" id="cb138"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb138-1"><a href="#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(queue)</span></code></pre></div>
+<pre><code>deque([2, 3])</code></pre>
+<div class="sourceCode" id="cb140"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb140-1"><a href="#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> queue:                    <span class="co"># Empting the queue</span></span>
+<span id="cb140-2"><a href="#cb140-2" aria-hidden="true" tabindex="-1"></a>    queue.popleft()</span>
+<span id="cb140-3"><a href="#cb140-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> queue:</span>
+<span id="cb140-4"><a href="#cb140-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot;Empty queue: </span><span class="sc">{</span>queue<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>2
+3
+Empty queue: deque([])</code></pre>
+<p><a href="#TOC">↺</a></p>
+<hr />
+</div>
+</div>
+<div id="tuples" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Tuples</h1>
+<p>A <code>tuple</code> is a <strong>read only list</strong>, i.e., it
+contains a sequence of objects where we cannot modify the sequence, nor
+add nor remove nor modify elements.</p>
+<blockquote>
+<p><strong>Rule of thumb</strong>: we want tu use a <code>tuple</code>
+when we deal with a sequence of objects where we don’t want to
+<strong>accidentally</strong> modify the sequence, nor add new objects
+nor remove any object</p>
+</blockquote>
+<p><a href="#TOC">↺</a></p>
+<div id="different-ways-to-create-tuples" class="section level2"
+number="4.1">
+<h2><span class="header-section-number">4.1</span> Different ways to
+create tuples</h2>
+<div id="parenthesis-and-also-just-enumerating" class="section level3"
+number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> Parenthesis, and
+also just enumerating</h3>
+<div class="sourceCode" id="cb142"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb142-1"><a href="#cb142-1" aria-hidden="true" tabindex="-1"></a>point1 <span class="op">=</span> (<span class="dv">1</span>, <span class="dv">2</span>)         <span class="co"># Normally, with parentheses</span></span>
+<span id="cb142-2"><a href="#cb142-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(point1), point1)</span></code></pre></div>
+<pre><code>&lt;class &#39;tuple&#39;&gt; (1, 2)</code></pre>
+<div class="sourceCode" id="cb144"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb144-1"><a href="#cb144-1" aria-hidden="true" tabindex="-1"></a>point2 <span class="op">=</span> <span class="dv">3</span>, <span class="dv">4</span>           <span class="co"># Python treat this as a tuple</span></span>
+<span id="cb144-2"><a href="#cb144-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(point2), point2)</span></code></pre></div>
+<pre><code>&lt;class &#39;tuple&#39;&gt; (3, 4)</code></pre>
+<div class="sourceCode" id="cb146"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb146-1"><a href="#cb146-1" aria-hidden="true" tabindex="-1"></a>point3 <span class="op">=</span> <span class="dv">5</span>,             <span class="co"># This is also a tuple</span></span>
+<span id="cb146-2"><a href="#cb146-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(point3), point3)</span></code></pre></div>
+<pre><code>&lt;class &#39;tuple&#39;&gt; (5,)</code></pre>
+<div class="sourceCode" id="cb148"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb148-1"><a href="#cb148-1" aria-hidden="true" tabindex="-1"></a>no_tuple <span class="op">=</span> <span class="dv">5</span>            <span class="co"># This is an integer</span></span>
+<span id="cb148-2"><a href="#cb148-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(no_tuple), no_tuple)</span></code></pre></div>
+<pre><code>&lt;class &#39;int&#39;&gt; 5</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+<div id="concatenation-with-operator" class="section level3"
+number="4.1.2">
+<h3><span class="header-section-number">4.1.2</span> Concatenation with
+<code>+</code> operator</h3>
+<div class="sourceCode" id="cb150"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb150-1"><a href="#cb150-1" aria-hidden="true" tabindex="-1"></a>concatenated <span class="op">=</span> (<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>) <span class="op">+</span> (<span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>) <span class="op">+</span> (<span class="st">&quot;f&quot;</span>,)</span>
+<span id="cb150-2"><a href="#cb150-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(concatenated), concatenated)</span></code></pre></div>
+<pre><code>&lt;class &#39;tuple&#39;&gt; (&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;, &#39;f&#39;)</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+<div id="repetition-with-operator" class="section level3"
+number="4.1.3">
+<h3><span class="header-section-number">4.1.3</span> Repetition with
+<code>*</code> operator</h3>
+<div class="sourceCode" id="cb152"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb152-1"><a href="#cb152-1" aria-hidden="true" tabindex="-1"></a>repeted <span class="op">=</span> (<span class="dv">1</span>, <span class="dv">2</span>) <span class="op">*</span> <span class="dv">3</span></span>
+<span id="cb152-2"><a href="#cb152-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(repeted), repeted)</span></code></pre></div>
+<pre><code>&lt;class &#39;tuple&#39;&gt; (1, 2, 1, 2, 1, 2)</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+</div>
+<div id="tuple-function-to-convert-iterables-into-tuples"
+class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> <code>tuple()</code>
+function to convert iterables into tuples</h2>
+<div class="sourceCode" id="cb154"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb154-1"><a href="#cb154-1" aria-hidden="true" tabindex="-1"></a>converted1 <span class="op">=</span> <span class="bu">tuple</span>([<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>])</span>
+<span id="cb154-2"><a href="#cb154-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(converted1), converted1)</span></code></pre></div>
+<pre><code>&lt;class &#39;tuple&#39;&gt; (7, 8, 9)</code></pre>
+<div class="sourceCode" id="cb156"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb156-1"><a href="#cb156-1" aria-hidden="true" tabindex="-1"></a>converted2 <span class="op">=</span> <span class="bu">tuple</span>(<span class="st">&quot;Hello my friend&quot;</span>)</span>
+<span id="cb156-2"><a href="#cb156-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(converted2), converted2)</span></code></pre></div>
+<pre><code>&lt;class &#39;tuple&#39;&gt; (&#39;H&#39;, &#39;e&#39;, &#39;l&#39;, &#39;l&#39;, &#39;o&#39;, &#39; &#39;, &#39;m&#39;, &#39;y&#39;, &#39; &#39;, &#39;f&#39;, &#39;r&#39;, &#39;i&#39;, &#39;e&#39;, &#39;n&#39;, &#39;d&#39;)</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+<div id="accessing-tuples" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Accessing tuples</h2>
+<div id="accessing-a-single-item-with-square-brackets-operator"
+class="section level3" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> Accessing a single
+item with square brackets <code>[]</code> operator</h3>
+<div class="sourceCode" id="cb158"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb158-1"><a href="#cb158-1" aria-hidden="true" tabindex="-1"></a>point <span class="op">=</span> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb158-2"><a href="#cb158-2" aria-hidden="true" tabindex="-1"></a>individual_tuple_item <span class="op">=</span> point[<span class="dv">0</span>]</span>
+<span id="cb158-3"><a href="#cb158-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb158-4"><a href="#cb158-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(individual_tuple_item), individual_tuple_item)</span></code></pre></div>
+<pre><code>&lt;class &#39;int&#39;&gt; 1</code></pre>
+</div>
+<div id="accessing-a-range-of-items-with-colon-operator"
+class="section level3" number="4.3.2">
+<h3><span class="header-section-number">4.3.2</span> Accessing a range
+of items with colon <code>:</code> operator</h3>
+<div class="sourceCode" id="cb160"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb160-1"><a href="#cb160-1" aria-hidden="true" tabindex="-1"></a>range_of_tuple_items <span class="op">=</span> point[<span class="dv">1</span>:]</span>
+<span id="cb160-2"><a href="#cb160-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(range_of_tuple_items), range_of_tuple_items)</span></code></pre></div>
+<pre><code>&lt;class &#39;tuple&#39;&gt; (2, 3)</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+</div>
+<div id="unpacking-tuples-just-how-assignment-operator-works"
+class="section level2" number="4.4">
+<h2><span class="header-section-number">4.4</span> Unpacking tuples,
+just how assignment <code>=</code> operator works</h2>
+<blockquote>
+<p>Unpacking tuples explains the <strong>behavior of the multiple
+assignment operator</strong> and the easy way in which we <strong>swap
+variables</strong> in python</p>
+</blockquote>
+<div class="sourceCode" id="cb162"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb162-1"><a href="#cb162-1" aria-hidden="true" tabindex="-1"></a>x, y, z <span class="op">=</span> point</span>
+<span id="cb162-2"><a href="#cb162-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Accisa:</span><span class="ch">\t\t</span><span class="sc">{</span>x<span class="sc">}</span><span class="ch">\n</span><span class="ss">Ordenada:</span><span class="ch">\t</span><span class="sc">{</span>y<span class="sc">}</span><span class="ch">\n</span><span class="ss">Eje Z:</span><span class="ch">\t\t</span><span class="sc">{</span>z<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>Accisa:     1
+Ordenada:   2
+Eje Z:      3</code></pre>
+<div class="sourceCode" id="cb164"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb164-1"><a href="#cb164-1" aria-hidden="true" tabindex="-1"></a>x, y <span class="op">=</span> <span class="dv">10</span>, <span class="dv">11</span>           <span class="co"># i.e.-&gt; x, y = (10, 11)</span></span>
+<span id="cb164-2"><a href="#cb164-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;x:&quot;</span>, x, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">y:&quot;</span>, y)</span></code></pre></div>
+<pre><code>x: 10 
+y: 11</code></pre>
+<div class="sourceCode" id="cb166"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb166-1"><a href="#cb166-1" aria-hidden="true" tabindex="-1"></a>x, y <span class="op">=</span> y, x             <span class="co"># i.e.-&gt; x, y = (y, x), easy swaping!!</span></span>
+<span id="cb166-2"><a href="#cb166-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;x:&quot;</span>, x, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">y:&quot;</span>, y)</span></code></pre></div>
+<pre><code>x: 11 
+y: 10</code></pre>
+<p>Two things happen there:</p>
+<ul>
+<li>On the right hand of the assignments, <strong><em>there’re
+tuples</em></strong>:
+<ul>
+<li><code>point</code> is a tuple</li>
+<li><code>10, 11</code> is tuple definition, the same as
+<code>(10, 11)</code><br />
+</li>
+<li><code>y, x</code> is also a tuple definition, the same as
+<code>(y, x)</code></li>
+</ul></li>
+<li>Then the assignment operator <strong><em>unpacks the
+tuple</em></strong> and assigns the unpacked values to the the variables
+declared on the left side, matching the positions:
+<ul>
+<li>first value unpacked on the right, to the first variable declared on
+the left<br />
+</li>
+<li>second value unpacked on the right, to the second variable declared
+on the left<br />
+</li>
+<li>and so on</li>
+</ul></li>
+</ul>
+<p><a href="#TOC">↺</a></p>
+</div>
+<div id="operator-in-to-check-for-the-existance-of-an-item"
+class="section level2" number="4.5">
+<h2><span class="header-section-number">4.5</span> Operator
+<code>in</code> to check for the existance of an item</h2>
+<div class="sourceCode" id="cb168"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb168-1"><a href="#cb168-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="dv">10</span> <span class="kw">in</span> point:</span>
+<span id="cb168-2"><a href="#cb168-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Item exists&quot;</span>)</span>
+<span id="cb168-3"><a href="#cb168-3" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb168-4"><a href="#cb168-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Item does not exist&quot;</span>)</span></code></pre></div>
+<pre><code>
+Item does not exist</code></pre>
+<p><a href="#TOC">↺</a></p>
+<hr />
+</div>
+</div>
+<div id="arrays" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> Arrays</h1>
+<div id="python-array-class" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Python
+<code>array</code> class</h2>
+<p>Python defines a class called <code>array</code> (which is in the
+<code>array</code> module) that:</p>
+<ul>
+<li>Represents an array or <strong>sequence of basic values</strong>
+(characters, integers, floating point numbers).<br />
+</li>
+<li>Behave very much like lists.<br />
+</li>
+<li>The type of objects stored in them is <strong>constrained</strong>,
+that is, cannot be changed.</li>
+</ul>
+</div>
+<div id="use-case" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Use case</h2>
+<p>When we use this contruct?</p>
+<ul>
+<li>Only when we deal with a <strong>long sequence of numbers</strong>
+(10.000+).<br />
+</li>
+<li>And when we encounter <strong>performance problems</strong>.</li>
+</ul>
+<p>For other cases, use <code>lists</code> an <code>tuples</code> by
+default.</p>
+</div>
+<div id="array-function-to-create-an-array" class="section level2"
+number="5.3">
+<h2><span class="header-section-number">5.3</span> <code>array()</code>
+function to create an array</h2>
+<div class="sourceCode" id="cb170"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb170-1"><a href="#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> array <span class="im">import</span> array</span>
+<span id="cb170-2"><a href="#cb170-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb170-3"><a href="#cb170-3" aria-hidden="true" tabindex="-1"></a>numbers <span class="op">=</span> array(<span class="st">&quot;i&quot;</span>, [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]) <span class="co">## See python doc for different typecodes</span></span>
+<span id="cb170-4"><a href="#cb170-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(numbers)</span></code></pre></div>
+<pre><code>array(&#39;i&#39;, [1, 2, 3, 4, 5])</code></pre>
+<p>Then, we can use <strong><code>array</code> methods</strong> to
+perform the <strong>same lists operations</strong>:</p>
+<ul>
+<li><code>append()</code>, <code>add()</code>, <code>remove()</code>,
+<code>pop()</code>, etc.</li>
+</ul>
+<p><a href="#TOC">↺</a></p>
+<hr />
+</div>
+</div>
+<div id="sets" class="section level1" number="6">
+<h1><span class="header-section-number">6</span> Sets</h1>
+<p><code>set</code>s are another very useful python data structure,
+basically, a <strong>collection with no duplicates</strong>.</p>
+<blockquote>
+<p>Remember that sets are <strong>unordered</strong> collections (they
+are not in sequence), so we <strong>cannot access them using an
+index!!</strong></p>
+</blockquote>
+<p><a href="#TOC">↺</a></p>
+<div id="different-way-for-creating-sets" class="section level2"
+number="6.1">
+<h2><span class="header-section-number">6.1</span> Different way for
+creating sets</h2>
+<div id="with-curly-brackets" class="section level3" number="6.1.1">
+<h3><span class="header-section-number">6.1.1</span> With curly
+<code>{}</code> brackets</h3>
+<div class="sourceCode" id="cb172"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb172-1"><a href="#cb172-1" aria-hidden="true" tabindex="-1"></a>first_set <span class="op">=</span> {<span class="dv">2</span>, <span class="dv">10</span>}</span>
+<span id="cb172-2"><a href="#cb172-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(first_set)</span></code></pre></div>
+<pre><code>{2, 10}</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+<div id="using-the-set-function-feito" class="section level3"
+number="6.1.2">
+<h3><span class="header-section-number">6.1.2</span> Using the
+<code>set()</code> function (feito)</h3>
+<div class="sourceCode" id="cb174"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb174-1"><a href="#cb174-1" aria-hidden="true" tabindex="-1"></a>set_of_even_numbers_1 <span class="op">=</span> <span class="bu">set</span>(<span class="st">&quot;2468&quot;</span>) <span class="co">## This is awful (set function randomly forms the set)</span></span>
+<span id="cb174-2"><a href="#cb174-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(set_of_even_numbers_1)</span></code></pre></div>
+<pre><code>{&#39;8&#39;, &#39;6&#39;, &#39;4&#39;, &#39;2&#39;}</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+<div id="with-a-comprehension-expression-cool" class="section level3"
+number="6.1.3">
+<h3><span class="header-section-number">6.1.3</span> With a
+<code>comprehension expression</code> (cool)</h3>
+<div class="sourceCode" id="cb176"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb176-1"><a href="#cb176-1" aria-hidden="true" tabindex="-1"></a>set_of_even_numbers_2 <span class="op">=</span> {x <span class="op">*</span> <span class="dv">2</span> <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>)}   <span class="co"># This is very cool</span></span>
+<span id="cb176-2"><a href="#cb176-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(set_of_even_numbers_2)</span></code></pre></div>
+<pre><code>{0, 2, 4, 6, 8}</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+</div>
+<div id="using-set-function-to-convert-and-eliminate-duplicates"
+class="section level2" number="6.2">
+<h2><span class="header-section-number">6.2</span> Using
+<code>set()</code> function to convert and eliminate duplicates</h2>
+<p>An interesting use of <code>set()</code> function is that of
+converting a <code>list</code> with <strong>duplicated elements</strong>
+into a <code>set</code>, in order to <strong>eliminate
+duplication</strong>.</p>
+<div class="sourceCode" id="cb178"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb178-1"><a href="#cb178-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">5</span>]</span>
+<span id="cb178-2"><a href="#cb178-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(numbers)</span></code></pre></div>
+<pre><code>[1, 1, 2, 3, 4, 4, 5]</code></pre>
+<div class="sourceCode" id="cb180"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb180-1"><a href="#cb180-1" aria-hidden="true" tabindex="-1"></a>second_set <span class="op">=</span> <span class="bu">set</span>(numbers)</span>
+<span id="cb180-2"><a href="#cb180-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(second_set)</span></code></pre></div>
+<pre><code>{1, 2, 3, 4, 5}</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+<div id="usual-add-remove-pop-etc.-methods-available"
+class="section level2" number="6.3">
+<h2><span class="header-section-number">6.3</span> Usual
+<code>add()</code>, <code>remove()</code>, <code>pop()</code>, etc.
+methods available</h2>
+<p>Similar to lists, we can add, remove, pop, etc.</p>
+<div class="sourceCode" id="cb182"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb182-1"><a href="#cb182-1" aria-hidden="true" tabindex="-1"></a>second_set.add(<span class="dv">0</span>)</span>
+<span id="cb182-2"><a href="#cb182-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(second_set)</span></code></pre></div>
+<pre><code>{0, 1, 2, 3, 4, 5}</code></pre>
+<div class="sourceCode" id="cb184"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb184-1"><a href="#cb184-1" aria-hidden="true" tabindex="-1"></a>second_set.remove(<span class="dv">3</span>)</span>
+<span id="cb184-2"><a href="#cb184-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(second_set)</span></code></pre></div>
+<pre><code>{0, 1, 2, 4, 5}</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+<div id="powerful-matematical-operations-with-sets"
+class="section level2" number="6.4">
+<h2><span class="header-section-number">6.4</span> Powerful matematical
+operations with sets:</h2>
+<p>But where <strong><code>set</code>s shine</strong>, are in the
+powerful mathematical operations of union, intersection and difference
+that are supported by them.</p>
+<p>Let’s take these sets to make some examples:</p>
+<div class="sourceCode" id="cb186"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb186-1"><a href="#cb186-1" aria-hidden="true" tabindex="-1"></a>third_set <span class="op">=</span> {<span class="dv">1</span>, <span class="dv">4</span>}</span></code></pre></div>
+<div class="sourceCode" id="cb187"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb187-1"><a href="#cb187-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;First set:&quot;</span>, first_set)</span></code></pre></div>
+<pre><code>First set: {2, 10}</code></pre>
+<div class="sourceCode" id="cb189"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb189-1"><a href="#cb189-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Second set:&quot;</span>, second_set)</span></code></pre></div>
+<pre><code>Second set: {0, 1, 2, 4, 5}</code></pre>
+<div class="sourceCode" id="cb191"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb191-1"><a href="#cb191-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Third set:&quot;</span>, third_set)</span></code></pre></div>
+<pre><code>Third set: {1, 4}</code></pre>
+<p><a href="#TOC">↺</a></p>
+<div id="union-operator" class="section level3" number="6.4.1">
+<h3><span class="header-section-number">6.4.1</span> Union, operator
+<code>|</code></h3>
+<p>The <strong>union</strong> of two sets returns a new set with all the
+items that are <strong>either</strong> in the first or in the second
+set.</p>
+<div class="sourceCode" id="cb193"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb193-1"><a href="#cb193-1" aria-hidden="true" tabindex="-1"></a>union1 <span class="op">=</span> first_set <span class="op">|</span> second_set</span>
+<span id="cb193-2"><a href="#cb193-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;1° | 2°:&quot;</span>, union1)</span></code></pre></div>
+<pre><code>1° | 2°: {0, 1, 2, 4, 5, 10}</code></pre>
+<div class="sourceCode" id="cb195"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb195-1"><a href="#cb195-1" aria-hidden="true" tabindex="-1"></a>union2 <span class="op">=</span> second_set <span class="op">|</span> third_set</span>
+<span id="cb195-2"><a href="#cb195-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;2° | 3°:&quot;</span>, union2)</span></code></pre></div>
+<pre><code>2° | 3°: {0, 1, 2, 4, 5}</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+<div id="intersection-operator" class="section level3" number="6.4.2">
+<h3><span class="header-section-number">6.4.2</span> Intersection,
+operator <code>&amp;</code></h3>
+<p>The <strong>intersection</strong> of two sets returns a new set with
+all the items that are in <strong>both</strong> first and second
+sets.</p>
+<div class="sourceCode" id="cb197"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb197-1"><a href="#cb197-1" aria-hidden="true" tabindex="-1"></a>intsct1 <span class="op">=</span> first_set <span class="op">&amp;</span> third_set</span>
+<span id="cb197-2"><a href="#cb197-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;1° &amp; 3°:&quot;</span>, intsct1)</span></code></pre></div>
+<pre><code>1° &amp; 3°: set()</code></pre>
+<div class="sourceCode" id="cb199"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb199-1"><a href="#cb199-1" aria-hidden="true" tabindex="-1"></a>intsct2 <span class="op">=</span> first_set <span class="op">&amp;</span> second_set</span>
+<span id="cb199-2"><a href="#cb199-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;1° &amp; 2°:&quot;</span>, intsct2)</span></code></pre></div>
+<pre><code>1° &amp; 2°: {2}</code></pre>
+<div class="sourceCode" id="cb201"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb201-1"><a href="#cb201-1" aria-hidden="true" tabindex="-1"></a>intsct3 <span class="op">=</span> second_set <span class="op">&amp;</span> third_set</span>
+<span id="cb201-2"><a href="#cb201-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;2° &amp; 3°:&quot;</span>, intsct3)</span></code></pre></div>
+<pre><code>2° &amp; 3°: {1, 4}</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+<div id="difference-operator--" class="section level3" number="6.4.3">
+<h3><span class="header-section-number">6.4.3</span> Difference,
+operator <code>-</code></h3>
+<p>The <strong>difference</strong> between two sets returns a new set
+with all the additional <strong>items in one set that the other set does
+not have</strong>.</p>
+<div class="sourceCode" id="cb203"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb203-1"><a href="#cb203-1" aria-hidden="true" tabindex="-1"></a>diff1 <span class="op">=</span> first_set <span class="op">-</span> second_set</span>
+<span id="cb203-2"><a href="#cb203-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;1° - 2°:&quot;</span>, diff1)</span></code></pre></div>
+<pre><code>1° - 2°: {10}</code></pre>
+<div class="sourceCode" id="cb205"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb205-1"><a href="#cb205-1" aria-hidden="true" tabindex="-1"></a>dif1 <span class="op">=</span> second_set <span class="op">-</span> first_set</span>
+<span id="cb205-2"><a href="#cb205-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;2° - 1°:&quot;</span>, dif1)</span></code></pre></div>
+<pre><code>2° - 1°: {0, 1, 4, 5}</code></pre>
+<div class="sourceCode" id="cb207"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb207-1"><a href="#cb207-1" aria-hidden="true" tabindex="-1"></a>diff2 <span class="op">=</span> second_set <span class="op">-</span> third_set</span>
+<span id="cb207-2"><a href="#cb207-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;2° - 3°:&quot;</span>, diff2)</span></code></pre></div>
+<pre><code>2° - 3°: {0, 2, 5}</code></pre>
+<div class="sourceCode" id="cb209"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb209-1"><a href="#cb209-1" aria-hidden="true" tabindex="-1"></a>dif2 <span class="op">=</span> third_set <span class="op">-</span> second_set</span>
+<span id="cb209-2"><a href="#cb209-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;3° - 2°:&quot;</span>, dif2)</span></code></pre></div>
+<pre><code>3° - 2°: set()</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+<div id="symmetric-difference-operator" class="section level3"
+number="6.4.4">
+<h3><span class="header-section-number">6.4.4</span> Symmetric
+difference, operator <code>^</code></h3>
+<p>The <strong>symmetric difference</strong> between two sets returns
+the items that are <strong>either in the first or second</strong> sets
+<strong>BUT not both</strong>.</p>
+<div class="sourceCode" id="cb211"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb211-1"><a href="#cb211-1" aria-hidden="true" tabindex="-1"></a>sim_diff1 <span class="op">=</span> first_set <span class="op">^</span> second_set</span>
+<span id="cb211-2"><a href="#cb211-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;1° ^ 2°:&quot;</span>, sim_diff1)</span></code></pre></div>
+<pre><code>1° ^ 2°: {0, 1, 4, 5, 10}</code></pre>
+<div class="sourceCode" id="cb213"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb213-1"><a href="#cb213-1" aria-hidden="true" tabindex="-1"></a>sim_diff2 <span class="op">=</span> second_set <span class="op">^</span> third_set</span>
+<span id="cb213-2"><a href="#cb213-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;2° ^ 3°:&quot;</span>, sim_diff2)</span></code></pre></div>
+<pre><code>2° ^ 3°: {0, 2, 5}</code></pre>
+<blockquote>
+<p><strong>Remember:</strong></p>
+<p>We cannot access elements of a set using index.</p>
+<p>With sets, we normally use the union, intersection and difference
+operations.</p>
+</blockquote>
+<p><a href="#TOC">↺</a></p>
+</div>
+</div>
+<div
+id="we-can-also-use-operator-in-to-check-the-existance-of-an-element"
+class="section level2" number="6.5">
+<h2><span class="header-section-number">6.5</span> We can also use
+operator <code>in</code> to check the existance of an element</h2>
+<div class="sourceCode" id="cb215"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb215-1"><a href="#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="dv">1</span> <span class="kw">in</span> first_set:</span>
+<span id="cb215-2"><a href="#cb215-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">1 exists in first set&quot;</span>)</span>
+<span id="cb215-3"><a href="#cb215-3" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb215-4"><a href="#cb215-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">1 does not exist in first set&quot;</span>)</span></code></pre></div>
+<pre><code>
+1 does not exist in first set</code></pre>
+<p><a href="#TOC">↺</a></p>
+<hr />
+</div>
+</div>
+<div id="dictionaries" class="section level1" number="7">
+<h1><span class="header-section-number">7</span> Dictionaries</h1>
+<p>Dictionaries are a very powerful data structure in phyton</p>
+<blockquote>
+<p>A dictionary is a <strong>collection of key-value
+pairs</strong>.<br />
+We use it to map a key to a value</p>
+</blockquote>
+<p><a href="#TOC">↺</a></p>
+<div id="ways-for-creating-a-dictionary" class="section level2"
+number="7.1">
+<h2><span class="header-section-number">7.1</span> Ways for creating a
+dictionary</h2>
+<div id="curly-brackets" class="section level3" number="7.1.1">
+<h3><span class="header-section-number">7.1.1</span> Curly
+<code>{}</code> brackets</h3>
+<p>We can use curly <code>{}</code> brackets to define a dictionary,
+with a <code>string</code> for the key (only <strong>immutable
+types</strong> for the keys: int, str), a colon <code>:</code> between
+the key/value pair and a value (it can be of <strong>any
+type</strong>).</p>
+<div class="sourceCode" id="cb217"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb217-1"><a href="#cb217-1" aria-hidden="true" tabindex="-1"></a>point1 <span class="op">=</span> {<span class="st">&quot;x&quot;</span>: <span class="dv">1</span>, <span class="st">&quot;y&quot;</span>: <span class="dv">2</span>}</span>
+<span id="cb217-2"><a href="#cb217-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(point1)</span></code></pre></div>
+<pre><code>{&#39;x&#39;: 1, &#39;y&#39;: 2}</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+<div id="the-dict-function" class="section level3" number="7.1.2">
+<h3><span class="header-section-number">7.1.2</span> The
+<code>dict()</code> function</h3>
+<p>We can also use de <code>dict()</code> function to create a
+dictionary.</p>
+<blockquote>
+<p>This approach is easier, cleaner and shorter, because we use keyword
+arguments instead of quotes.</p>
+</blockquote>
+<div class="sourceCode" id="cb219"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb219-1"><a href="#cb219-1" aria-hidden="true" tabindex="-1"></a>point2 <span class="op">=</span> <span class="bu">dict</span>(x<span class="op">=</span><span class="dv">3</span>, y<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb219-2"><a href="#cb219-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(point2)</span></code></pre></div>
+<pre><code>{&#39;x&#39;: 3, &#39;y&#39;: 9}</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+<div id="a-comprehension-expression" class="section level3"
+number="7.1.3">
+<h3><span class="header-section-number">7.1.3</span> A
+<code>comprehension expression</code></h3>
+<p>A dictionary can also be created using a
+<code>comprehension expression</code> with a key/value pair in the
+expression part.</p>
+<p>For example, instead of the standard for:</p>
+<div class="sourceCode" id="cb221"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb221-1"><a href="#cb221-1" aria-hidden="true" tabindex="-1"></a>even_values_1 <span class="op">=</span> {}</span>
+<span id="cb221-2"><a href="#cb221-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):</span>
+<span id="cb221-3"><a href="#cb221-3" aria-hidden="true" tabindex="-1"></a>    even_values_1[x] <span class="op">=</span> x <span class="op">*</span> <span class="dv">2</span></span>
+<span id="cb221-4"><a href="#cb221-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(even_values_1)</span></code></pre></div>
+<pre><code>{0: 0, 1: 2, 2: 4, 3: 6, 4: 8}</code></pre>
+<p>We can more efficiently use this comprehension expression:</p>
+<div class="sourceCode" id="cb223"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb223-1"><a href="#cb223-1" aria-hidden="true" tabindex="-1"></a>even_values_2 <span class="op">=</span> {x: x <span class="op">*</span> <span class="dv">2</span> <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>)}</span>
+<span id="cb223-2"><a href="#cb223-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(even_values_2)</span></code></pre></div>
+<pre><code>{0: 0, 1: 2, 2: 4, 3: 6, 4: 8}</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+</div>
+<div id="accessing-dictionaries" class="section level2" number="7.2">
+<h2><span class="header-section-number">7.2</span> Accessing
+dictionaries</h2>
+<div id="keys-not-indexes" class="section level3" number="7.2.1">
+<h3><span class="header-section-number">7.2.1</span> Keys, not
+indexes</h3>
+<p>Instead of indexes, we access the values of dictionaries with the
+keys.</p>
+<div class="sourceCode" id="cb225"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb225-1"><a href="#cb225-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(point1)</span></code></pre></div>
+<pre><code>{&#39;x&#39;: 1, &#39;y&#39;: 2}</code></pre>
+<div class="sourceCode" id="cb227"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb227-1"><a href="#cb227-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(point1[<span class="st">&quot;x&quot;</span>])</span></code></pre></div>
+<pre><code>1</code></pre>
+<div class="sourceCode" id="cb229"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb229-1"><a href="#cb229-1" aria-hidden="true" tabindex="-1"></a>point1[<span class="st">&quot;x&quot;</span>] <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb229-2"><a href="#cb229-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(point1[<span class="st">&quot;x&quot;</span>])</span></code></pre></div>
+<pre><code>0</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+<div id="adding-new-keys" class="section level3" number="7.2.2">
+<h3><span class="header-section-number">7.2.2</span> Adding new
+keys</h3>
+<p>We can <strong>add a new key</strong>, with the same syntax:</p>
+<div class="sourceCode" id="cb231"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb231-1"><a href="#cb231-1" aria-hidden="true" tabindex="-1"></a>point1[<span class="st">&quot;z&quot;</span>] <span class="op">=</span> <span class="dv">12</span></span>
+<span id="cb231-2"><a href="#cb231-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(point1)</span></code></pre></div>
+<pre><code>{&#39;x&#39;: 0, &#39;y&#39;: 2, &#39;z&#39;: 12}</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+<div id="deleting-an-item-with-del-statement" class="section level3"
+number="7.2.3">
+<h3><span class="header-section-number">7.2.3</span> Deleting an item
+with <code>del</code> statement</h3>
+<p>To delete an item, we use de <code>del</code> construct.</p>
+<div class="sourceCode" id="cb233"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb233-1"><a href="#cb233-1" aria-hidden="true" tabindex="-1"></a><span class="kw">del</span> point1[<span class="st">&quot;z&quot;</span>]</span>
+<span id="cb233-2"><a href="#cb233-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(point1)</span></code></pre></div>
+<pre><code>{&#39;x&#39;: 0, &#39;y&#39;: 2}</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+<div id="operator-in-or-get-method-to-avoid-key-access-error"
+class="section level3" number="7.2.4">
+<h3><span class="header-section-number">7.2.4</span> Operator
+<code>in</code> or <code>get()</code> method to avoid key access
+error</h3>
+<p>In order to avoid a key access error, we check the existence of the
+key:</p>
+<ul>
+<li><p>with the <code>in</code> operator, or</p></li>
+<li><p>with the <code>get()</code> method instead of the brackets.</p>
+<ul>
+<li>This method <strong>returns <code>None</code></strong> if the key
+does not exist.<br />
+</li>
+<li>And allows us to specify a default value as a return of non
+existence.</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb235"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb235-1"><a href="#cb235-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">&quot;a&quot;</span> <span class="kw">in</span> point1:</span>
+<span id="cb235-2"><a href="#cb235-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(point1[<span class="st">&quot;a&quot;</span>])</span>
+<span id="cb235-3"><a href="#cb235-3" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb235-4"><a href="#cb235-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;&#39;a&#39; is not a valid key&quot;</span>)</span></code></pre></div>
+<pre><code>&#39;a&#39; is not a valid key</code></pre>
+<div class="sourceCode" id="cb237"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb237-1"><a href="#cb237-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(point1.get(<span class="st">&quot;a&quot;</span>))</span></code></pre></div>
+<pre><code>None</code></pre>
+<div class="sourceCode" id="cb239"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb239-1"><a href="#cb239-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> point1.get(<span class="st">&quot;a&quot;</span>):</span>
+<span id="cb239-2"><a href="#cb239-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;&#39;a&#39; is not a valid key&quot;</span>)</span></code></pre></div>
+<pre><code>&#39;a&#39; is not a valid key</code></pre>
+<div class="sourceCode" id="cb241"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb241-1"><a href="#cb241-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(point1.get(<span class="st">&quot;a&quot;</span>, <span class="dv">0</span>))</span></code></pre></div>
+<pre><code>0</code></pre>
+<div class="sourceCode" id="cb243"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb243-1"><a href="#cb243-1" aria-hidden="true" tabindex="-1"></a>error_msg <span class="op">=</span> <span class="st">&quot;&#39;a&#39; is not a valid key&quot;</span></span>
+<span id="cb243-2"><a href="#cb243-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(point1.get(<span class="st">&quot;a&quot;</span>, error_msg))</span></code></pre></div>
+<pre><code>&#39;a&#39; is not a valid key</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+<div id="how-to-loop-over-dictionaries" class="section level3"
+number="7.2.5">
+<h3><span class="header-section-number">7.2.5</span> How to
+<code>loop</code> over dictionaries</h3>
+<div id="a-standard-for-to-get-only-the-keys" class="section level4"
+number="7.2.5.1">
+<h4><span class="header-section-number">7.2.5.1</span> A standard
+<code>for</code> to get only the keys</h4>
+<p>We can use a standard <code>for</code> to loop over a dictionary.</p>
+<blockquote>
+<p>The ‘for’ retuns <strong>only the key</strong> at every step, which
+we can use to access the corrisponding value at that step.</p>
+</blockquote>
+<div class="sourceCode" id="cb245"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb245-1"><a href="#cb245-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> key <span class="kw">in</span> point1:</span>
+<span id="cb245-2"><a href="#cb245-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(key, point1[key])</span></code></pre></div>
+<pre><code>x 0
+y 2</code></pre>
+</div>
+<div
+id="combining-the-for-loop-with-the-items-method-with-or-without-unpacking"
+class="section level4" number="7.2.5.2">
+<h4><span class="header-section-number">7.2.5.2</span> Combining the
+<code>for</code> loop with the <code>items()</code> method, with or
+without unpacking</h4>
+<p>The <code>items()</code> method <strong>returns</strong> the
+<strong>key-value pair as a tuple</strong></p>
+<p>So, we could combine the <code>for</code> loop with the
+<code>items()</code> method, <strong>without unpacking</strong>, i.e.,
+using a single local variable within the loop.</p>
+<div class="sourceCode" id="cb247"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb247-1"><a href="#cb247-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> pair <span class="kw">in</span> point1.items():</span>
+<span id="cb247-2"><a href="#cb247-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(pair)</span></code></pre></div>
+<pre><code>(&#39;x&#39;, 0)
+(&#39;y&#39;, 2)</code></pre>
+<p>Or make the same combination but this time
+<strong>unpacking</strong>, i.e., using two variables inside the
+loop.</p>
+<div class="sourceCode" id="cb249"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb249-1"><a href="#cb249-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> key, value <span class="kw">in</span> point1.items():</span>
+<span id="cb249-2"><a href="#cb249-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(key, value)</span></code></pre></div>
+<pre><code>x 0
+y 2</code></pre>
+<p><a href="#TOC">↺</a></p>
+<hr />
+</div>
+</div>
+</div>
+</div>
+<div id="generator-objects" class="section level1" number="8">
+<h1><span class="header-section-number">8</span> Generator objects</h1>
+<p>We use a generator object when we have to deal with a <strong>very
+large data set</strong> (say, 1 billion numbers, chars, whatever) or
+<strong>potentially an infinite stream of data</strong>.</p>
+<p>Using data structures such as <code>lists</code>,
+<code>tuples</code>, <code>sets</code>, brings us a severe problem in
+terms of computer resources because with those data structures <em>every
+item is stored in memory</em>.</p>
+<p>So, a solution is a generator object.</p>
+<blockquote>
+<p>It is an <code>iterable</code> object that <strong>do not store
+all</strong> the values in memory, it <strong>generates a new</strong>
+value in <strong>each iteration.</strong></p>
+</blockquote>
+<p><a href="#TOC">↺</a></p>
+<div id="how-to-create-a-generator-object" class="section level2"
+number="8.1">
+<h2><span class="header-section-number">8.1</span> How to create a
+generator object</h2>
+<p>We create a generator object using a
+<code>comprehension expression</code> enclosed within parenthesis
+<code>()</code></p>
+<div class="sourceCode" id="cb251"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb251-1"><a href="#cb251-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sys <span class="im">import</span> getsizeof</span>
+<span id="cb251-2"><a href="#cb251-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb251-3"><a href="#cb251-3" aria-hidden="true" tabindex="-1"></a>even_values <span class="op">=</span> (x <span class="op">*</span> <span class="dv">2</span> <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>))</span>
+<span id="cb251-4"><a href="#cb251-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(even_values)</span></code></pre></div>
+<pre><code>&lt;generator object &lt;genexpr&gt; at 0x7f155264fed0&gt;</code></pre>
+<blockquote>
+<p>This is a generator object, not a tupple.</p>
+<p>Unlike lists, sets and dictionaries, we <strong>cannot create
+tuples</strong> with a <code>comprehension expression</code>.</p>
+</blockquote>
+<p><a href="#TOC">↺</a></p>
+</div>
+<div id="accessing-a-generator-object" class="section level2"
+number="8.2">
+<h2><span class="header-section-number">8.2</span> Accessing a generator
+object</h2>
+<div id="the-len-function-gives-an-error" class="section level3"
+number="8.2.1">
+<h3><span class="header-section-number">8.2.1</span> The ‘len()’
+function gives an error</h3>
+<p>Because a generator object don’t store all items in memory, we wont
+be able to get the total number of items we are working with.</p>
+<blockquote>
+<p>In fact, a genarator object has no lenght, we don’t know head of time
+how many items the generator object is going to produce.</p>
+</blockquote>
+<div class="sourceCode" id="cb253"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb253-1"><a href="#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(even_values))</span></code></pre></div>
+<ul>
+<li>If we execute that statement, the interpreter will give as the
+following error:
+<code>TypeError: object of type 'generator' has no len()</code></li>
+</ul>
+<p><a href="#TOC">↺</a></p>
+</div>
+<div id="we-must-iterate" class="section level3" number="8.2.2">
+<h3><span class="header-section-number">8.2.2</span> We must
+iterate</h3>
+<p>So, we can only access the items or values, when we iterate over the
+generator object.</p>
+<div class="sourceCode" id="cb254"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb254-1"><a href="#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> even_values:</span>
+<span id="cb254-2"><a href="#cb254-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(x)</span></code></pre></div>
+<pre><code>0
+2
+4
+6
+8
+10
+12
+14
+16
+18</code></pre>
+<ul>
+<li>In each iteration, the generator object spits out a new value.<br />
+</li>
+<li>In other words, we wont know “head of time” how many objects or how
+many items the generator object is going to produce.</li>
+</ul>
+<p>Let’s see in memory if all this is true, with the
+<code>getsizeof()</code> function.</p>
+<div class="sourceCode" id="cb256"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb256-1"><a href="#cb256-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;gen_obj_1:&quot;</span>, getsizeof(even_values), <span class="st">&quot;bytes&quot;</span>)</span></code></pre></div>
+<pre><code>gen_obj_1: 128 bytes</code></pre>
+<div class="sourceCode" id="cb258"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb258-1"><a href="#cb258-1" aria-hidden="true" tabindex="-1"></a>huge_range_1 <span class="op">=</span> (x <span class="op">*</span> <span class="dv">2</span> <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1000</span>))         <span class="co"># k</span></span>
+<span id="cb258-2"><a href="#cb258-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;gen_obj_2:&quot;</span>, getsizeof(huge_range_1), <span class="st">&quot;bytes&quot;</span>)</span></code></pre></div>
+<pre><code>gen_obj_2: 128 bytes</code></pre>
+<div class="sourceCode" id="cb260"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb260-1"><a href="#cb260-1" aria-hidden="true" tabindex="-1"></a>huge_range_2 <span class="op">=</span> (x <span class="op">*</span> <span class="dv">2</span> <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10000</span>))        <span class="co"># 10k</span></span>
+<span id="cb260-2"><a href="#cb260-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;gen_obj_3:&quot;</span>, getsizeof(huge_range_2), <span class="st">&quot;bytes&quot;</span>)</span></code></pre></div>
+<pre><code>gen_obj_3: 128 bytes</code></pre>
+<div class="sourceCode" id="cb262"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb262-1"><a href="#cb262-1" aria-hidden="true" tabindex="-1"></a>huge_range_3 <span class="op">=</span> (x <span class="op">*</span> <span class="dv">2</span> <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100000</span>))       <span class="co"># 100k</span></span>
+<span id="cb262-2"><a href="#cb262-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;gen_obj_4:&quot;</span>, getsizeof(huge_range_3), <span class="st">&quot;bytes&quot;</span>)</span></code></pre></div>
+<pre><code>gen_obj_4: 128 bytes</code></pre>
+<div class="sourceCode" id="cb264"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb264-1"><a href="#cb264-1" aria-hidden="true" tabindex="-1"></a>huge_range_4 <span class="op">=</span> (x <span class="op">*</span> <span class="dv">2</span> <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1000000</span>))      <span class="co"># M</span></span>
+<span id="cb264-2"><a href="#cb264-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;gen_obj_5:&quot;</span>, getsizeof(huge_range_4), <span class="st">&quot;bytes&quot;</span>)</span></code></pre></div>
+<pre><code>gen_obj_5: 128 bytes</code></pre>
+<div class="sourceCode" id="cb266"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb266-1"><a href="#cb266-1" aria-hidden="true" tabindex="-1"></a>huge_range_5 <span class="op">=</span> (x <span class="op">*</span> <span class="dv">2</span> <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10000000</span>))     <span class="co"># 10M</span></span>
+<span id="cb266-2"><a href="#cb266-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;gen_obj_6:&quot;</span>, getsizeof(huge_range_5), <span class="st">&quot;bytes&quot;</span>)</span></code></pre></div>
+<pre><code>gen_obj_6: 128 bytes</code></pre>
+<div class="sourceCode" id="cb268"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb268-1"><a href="#cb268-1" aria-hidden="true" tabindex="-1"></a>huge_range_6 <span class="op">=</span> (x <span class="op">*</span> <span class="dv">2</span> <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100000000</span>))    <span class="co"># 100M</span></span>
+<span id="cb268-2"><a href="#cb268-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;gen_obj_7:&quot;</span>, getsizeof(huge_range_6), <span class="st">&quot;bytes&quot;</span>)</span></code></pre></div>
+<pre><code>gen_obj_7: 128 bytes</code></pre>
+<div class="sourceCode" id="cb270"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb270-1"><a href="#cb270-1" aria-hidden="true" tabindex="-1"></a>huge_range_7 <span class="op">=</span> (x <span class="op">*</span> <span class="dv">2</span> <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1000000000</span>))   <span class="co"># G</span></span>
+<span id="cb270-2"><a href="#cb270-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;gen_obj_8:&quot;</span>, getsizeof(huge_range_7), <span class="st">&quot;bytes&quot;</span>)</span></code></pre></div>
+<pre><code>gen_obj_8: 128 bytes</code></pre>
+<div class="sourceCode" id="cb272"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb272-1"><a href="#cb272-1" aria-hidden="true" tabindex="-1"></a>huge_range_8 <span class="op">=</span> [x <span class="op">*</span> <span class="dv">2</span> <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100000</span>)]       <span class="co"># 100k</span></span>
+<span id="cb272-2"><a href="#cb272-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;list:&quot;</span>, getsizeof(huge_range_8), <span class="st">&quot;bytes&quot;</span>)</span></code></pre></div>
+<pre><code>list: 824472 bytes</code></pre>
+<p><a href="#TOC">↺</a></p>
+<hr />
+</div>
+</div>
+</div>
+<div id="unpacking-operator" class="section level1" number="9">
+<h1><span class="header-section-number">9</span> Unpacking operator</h1>
+<p>With the <code>unpacking operator</code> we can unpack <strong>any
+<code>iterable</code>:</strong></p>
+<ul>
+<li>symbol for unpacking <code>lists</code>:
+<strong><code>*</code></strong></li>
+<li>symbol for unpacking <code>dictionaries</code>:
+<strong><code>**</code></strong></li>
+</ul>
+<p><a href="#TOC">↺</a></p>
+<div id="useful-applications" class="section level2" number="9.1">
+<h2><span class="header-section-number">9.1</span> Useful
+applications</h2>
+<div id="printing-individual-items" class="section level3"
+number="9.1.1">
+<h3><span class="header-section-number">9.1.1</span> Printing individual
+items</h3>
+<div class="sourceCode" id="cb274"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb274-1"><a href="#cb274-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb274-2"><a href="#cb274-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(numbers)</span></code></pre></div>
+<pre><code>[1, 2, 3]</code></pre>
+<div class="sourceCode" id="cb276"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb276-1"><a href="#cb276-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="op">*</span>numbers)</span></code></pre></div>
+<pre><code>1 2 3</code></pre>
+<ul>
+<li>Here, the <code>*</code> operator, unpacks the container, takes all
+it’s individual elements and passes them as arbitrary arguments to the
+print function.</li>
+</ul>
+<p><a href="#TOC">↺</a></p>
+</div>
+<div id="creating-lists" class="section level3" number="9.1.2">
+<h3><span class="header-section-number">9.1.2</span> Creating lists</h3>
+<div class="sourceCode" id="cb278"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb278-1"><a href="#cb278-1" aria-hidden="true" tabindex="-1"></a>values1 <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">5</span>))</span>
+<span id="cb278-2"><a href="#cb278-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(values1)</span></code></pre></div>
+<pre><code>[0, 1, 2, 3, 4]</code></pre>
+<div class="sourceCode" id="cb280"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb280-1"><a href="#cb280-1" aria-hidden="true" tabindex="-1"></a>values2 <span class="op">=</span> [<span class="op">*</span><span class="bu">range</span>(<span class="dv">10</span>)]</span>
+<span id="cb280-2"><a href="#cb280-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(values2)</span></code></pre></div>
+<pre><code>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</code></pre>
+<div class="sourceCode" id="cb282"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb282-1"><a href="#cb282-1" aria-hidden="true" tabindex="-1"></a>letters <span class="op">=</span> [<span class="op">*</span><span class="st">&quot;Christian&quot;</span>]</span>
+<span id="cb282-2"><a href="#cb282-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(letters)</span></code></pre></div>
+<pre><code>[&#39;C&#39;, &#39;h&#39;, &#39;r&#39;, &#39;i&#39;, &#39;s&#39;, &#39;t&#39;, &#39;i&#39;, &#39;a&#39;, &#39;n&#39;]</code></pre>
+<div class="sourceCode" id="cb284"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb284-1"><a href="#cb284-1" aria-hidden="true" tabindex="-1"></a>mix1 <span class="op">=</span> [<span class="op">*</span><span class="bu">range</span>(<span class="dv">3</span>), <span class="op">*</span><span class="st">&quot;Voila&quot;</span>]</span>
+<span id="cb284-2"><a href="#cb284-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mix1)</span></code></pre></div>
+<pre><code>[0, 1, 2, &#39;V&#39;, &#39;o&#39;, &#39;i&#39;, &#39;l&#39;, &#39;a&#39;]</code></pre>
+<div class="sourceCode" id="cb286"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb286-1"><a href="#cb286-1" aria-hidden="true" tabindex="-1"></a>mix2 <span class="op">=</span> [<span class="op">*</span>values1, <span class="st">&quot;&amp;&quot;</span>, <span class="op">*</span>letters]</span>
+<span id="cb286-2"><a href="#cb286-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(mix2)</span></code></pre></div>
+<pre><code>[0, 1, 2, 3, 4, &#39;&amp;&#39;, &#39;C&#39;, &#39;h&#39;, &#39;r&#39;, &#39;i&#39;, &#39;s&#39;, &#39;t&#39;, &#39;i&#39;, &#39;a&#39;, &#39;n&#39;]</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+<div id="unpacking-dictionaries" class="section level3" number="9.1.3">
+<h3><span class="header-section-number">9.1.3</span> Unpacking
+dictionaries</h3>
+<div class="sourceCode" id="cb288"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb288-1"><a href="#cb288-1" aria-hidden="true" tabindex="-1"></a>first <span class="op">=</span> {<span class="st">&quot;x&quot;</span>: <span class="dv">1</span>}</span>
+<span id="cb288-2"><a href="#cb288-2" aria-hidden="true" tabindex="-1"></a>second <span class="op">=</span> {<span class="st">&quot;x&quot;</span>: <span class="dv">10</span>, <span class="st">&quot;y&quot;</span>: <span class="dv">2</span>}</span>
+<span id="cb288-3"><a href="#cb288-3" aria-hidden="true" tabindex="-1"></a>combined <span class="op">=</span> {<span class="op">**</span>first, <span class="op">**</span>second, <span class="st">&quot;z&quot;</span>: <span class="dv">1</span>}</span>
+<span id="cb288-4"><a href="#cb288-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb288-5"><a href="#cb288-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(combined)</span></code></pre></div>
+<pre><code>{&#39;x&#39;: 10, &#39;y&#39;: 2, &#39;z&#39;: 1}</code></pre>
+<ul>
+<li>If there are multiple items with the <strong>same key</strong>, the
+<strong>last value will be used</strong>.</li>
+</ul>
+<p><a href="#TOC">↺</a></p>
+<hr />
+</div>
+</div>
+</div>
+<div id="excercise-most-repeated-character" class="section level1"
+number="10">
+<h1><span class="header-section-number">10</span> Excercise: most
+repeated character</h1>
+<blockquote>
+<p>Write a program to determine the most repeated character in a given
+sentence.</p>
+</blockquote>
+<div id="my-first-attempt-with-a-dictionary." class="section level2"
+number="10.1">
+<h2><span class="header-section-number">10.1</span> My first attempt
+with a dictionary.</h2>
+<div class="sourceCode" id="cb290"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb290-1"><a href="#cb290-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pprint <span class="im">import</span> pprint</span>
+<span id="cb290-2"><a href="#cb290-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb290-3"><a href="#cb290-3" aria-hidden="true" tabindex="-1"></a>sentence <span class="op">=</span> <span class="st">&quot;This is a common inteview question&quot;</span></span>
+<span id="cb290-4"><a href="#cb290-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb290-5"><a href="#cb290-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating an alphabet with all letters set to zero.</span></span>
+<span id="cb290-6"><a href="#cb290-6" aria-hidden="true" tabindex="-1"></a>alphabet <span class="op">=</span> {letter: <span class="dv">0</span> <span class="cf">for</span> letter <span class="kw">in</span> <span class="st">&quot;abcdefghijklmnopqrstuvwxyz&quot;</span>}</span>
+<span id="cb290-7"><a href="#cb290-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb290-8"><a href="#cb290-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Initializing the output variable.</span></span>
+<span id="cb290-9"><a href="#cb290-9" aria-hidden="true" tabindex="-1"></a>most_repeted <span class="op">=</span> <span class="st">&quot;a&quot;</span></span>
+<span id="cb290-10"><a href="#cb290-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> sentence:</span>
+<span id="cb290-11"><a href="#cb290-11" aria-hidden="true" tabindex="-1"></a>    most_repeted <span class="op">=</span> <span class="st">&quot;Void string&quot;</span></span>
+<span id="cb290-12"><a href="#cb290-12" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:                           <span class="co"># Searching for the most repeated character.</span></span>
+<span id="cb290-13"><a href="#cb290-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> character <span class="kw">in</span> sentence.lower():</span>
+<span id="cb290-14"><a href="#cb290-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> character <span class="kw">in</span> alphabet:</span>
+<span id="cb290-15"><a href="#cb290-15" aria-hidden="true" tabindex="-1"></a>            alphabet[character] <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb290-16"><a href="#cb290-16" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> alphabet[character] <span class="op">&gt;</span> alphabet[most_repeted]:</span>
+<span id="cb290-17"><a href="#cb290-17" aria-hidden="true" tabindex="-1"></a>                most_repeted <span class="op">=</span> character</span></code></pre></div>
+<p>Let’s print the results and see how it goes:</p>
+<div class="sourceCode" id="cb291"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb291-1"><a href="#cb291-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Sentence:</span><span class="ch">\n</span><span class="sc">{</span>sentence<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>Sentence:
+This is a common inteview question</code></pre>
+<div class="sourceCode" id="cb293"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb293-1"><a href="#cb293-1" aria-hidden="true" tabindex="-1"></a>pprint(alphabet, width<span class="op">=</span><span class="dv">1</span>)</span></code></pre></div>
+<pre><code>{&#39;a&#39;: 1,
+ &#39;b&#39;: 0,
+ &#39;c&#39;: 1,
+ &#39;d&#39;: 0,
+ &#39;e&#39;: 3,
+ &#39;f&#39;: 0,
+ &#39;g&#39;: 0,
+ &#39;h&#39;: 1,
+ &#39;i&#39;: 5,
+ &#39;j&#39;: 0,
+ &#39;k&#39;: 0,
+ &#39;l&#39;: 0,
+ &#39;m&#39;: 2,
+ &#39;n&#39;: 3,
+ &#39;o&#39;: 3,
+ &#39;p&#39;: 0,
+ &#39;q&#39;: 1,
+ &#39;r&#39;: 0,
+ &#39;s&#39;: 3,
+ &#39;t&#39;: 3,
+ &#39;u&#39;: 1,
+ &#39;v&#39;: 1,
+ &#39;w&#39;: 1,
+ &#39;x&#39;: 0,
+ &#39;y&#39;: 0,
+ &#39;z&#39;: 0}</code></pre>
+<div class="sourceCode" id="cb295"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb295-1"><a href="#cb295-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;</span><span class="ch">\n</span><span class="ss">Most repeted character:</span><span class="ch">\n</span><span class="ss">&#39;</span><span class="sc">{</span>most_repeted<span class="sc">}</span><span class="ss">&#39;: </span><span class="sc">{</span>alphabet[most_repeted]<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>
+Most repeted character:
+&#39;i&#39;: 5</code></pre>
+<p><a href="#TOC">↺</a></p>
+</div>
+<div id="another-implementation" class="section level2" number="10.2">
+<h2><span class="header-section-number">10.2</span> Another
+implementation</h2>
+<p>This is another implementation, but also with a dictionary.</p>
+<blockquote>
+<p>The selection of the data structure is important.</p>
+</blockquote>
+<blockquote>
+<p>Here, a dictionary is a very good choice because we want to keep
+trace of a key-value pair: letter-number_of_times_it_appears.</p>
+</blockquote>
+<blockquote>
+<p>However, the difference with the previous solution, will be that,
+instead of a dictionary with all the letters of the alphabet, only a
+dictionary with the letters of the sentence is going to be created.</p>
+</blockquote>
+<blockquote>
+<p>As we’ll see, this approach leads us to the problem of sorting the
+dictionary in order to pick up the most repeated character.</p>
+</blockquote>
+<div class="sourceCode" id="cb297"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb297-1"><a href="#cb297-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pprint <span class="im">import</span> pprint</span>
+<span id="cb297-2"><a href="#cb297-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb297-3"><a href="#cb297-3" aria-hidden="true" tabindex="-1"></a>sentence <span class="op">=</span> <span class="st">&quot;This is a common inteview question&quot;</span></span>
+<span id="cb297-4"><a href="#cb297-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb297-5"><a href="#cb297-5" aria-hidden="true" tabindex="-1"></a><span class="co"># A dictionary with only the letters of the sentence</span></span>
+<span id="cb297-6"><a href="#cb297-6" aria-hidden="true" tabindex="-1"></a>char_frequency <span class="op">=</span> {}</span>
+<span id="cb297-7"><a href="#cb297-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> char <span class="kw">in</span> sentence:</span>
+<span id="cb297-8"><a href="#cb297-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> char <span class="kw">in</span> char_frequency:</span>
+<span id="cb297-9"><a href="#cb297-9" aria-hidden="true" tabindex="-1"></a>        char_frequency[char] <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb297-10"><a href="#cb297-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb297-11"><a href="#cb297-11" aria-hidden="true" tabindex="-1"></a>        char_frequency[char] <span class="op">=</span> <span class="dv">1</span>    <span class="co"># Add the letter to the dictionary</span></span>
+<span id="cb297-12"><a href="#cb297-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb297-13"><a href="#cb297-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Sentence:</span><span class="ch">\n</span><span class="sc">{</span>sentence<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>Sentence:
+This is a common inteview question</code></pre>
+<div class="sourceCode" id="cb299"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb299-1"><a href="#cb299-1" aria-hidden="true" tabindex="-1"></a>pprint(char_frequency, width<span class="op">=</span><span class="dv">1</span>)</span></code></pre></div>
+<pre><code>{&#39; &#39;: 5,
+ &#39;T&#39;: 1,
+ &#39;a&#39;: 1,
+ &#39;c&#39;: 1,
+ &#39;e&#39;: 3,
+ &#39;h&#39;: 1,
+ &#39;i&#39;: 5,
+ &#39;m&#39;: 2,
+ &#39;n&#39;: 3,
+ &#39;o&#39;: 3,
+ &#39;q&#39;: 1,
+ &#39;s&#39;: 3,
+ &#39;t&#39;: 2,
+ &#39;u&#39;: 1,
+ &#39;v&#39;: 1,
+ &#39;w&#39;: 1}</code></pre>
+<p>The next step is to <strong>sort the dictionary</strong> by the
+frequency of the characters:</p>
+<div class="sourceCode" id="cb301"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb301-1"><a href="#cb301-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(char_frequency.items())</span></code></pre></div>
+<pre><code>dict_items([(&#39;T&#39;, 1), (&#39;h&#39;, 1), (&#39;i&#39;, 5), (&#39;s&#39;, 3), (&#39; &#39;, 5), (&#39;a&#39;, 1), (&#39;c&#39;, 1), (&#39;o&#39;, 3), (&#39;m&#39;, 2), (&#39;n&#39;, 3), (&#39;t&#39;, 2), (&#39;e&#39;, 3), (&#39;v&#39;, 1), (&#39;w&#39;, 1), (&#39;q&#39;, 1), (&#39;u&#39;, 1)])</code></pre>
+<div class="sourceCode" id="cb303"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb303-1"><a href="#cb303-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">sorted</span>(char_frequency.items()))</span></code></pre></div>
+<pre><code>[(&#39; &#39;, 5), (&#39;T&#39;, 1), (&#39;a&#39;, 1), (&#39;c&#39;, 1), (&#39;e&#39;, 3), (&#39;h&#39;, 1), (&#39;i&#39;, 5), (&#39;m&#39;, 2), (&#39;n&#39;, 3), (&#39;o&#39;, 3), (&#39;q&#39;, 1), (&#39;s&#39;, 3), (&#39;t&#39;, 2), (&#39;u&#39;, 1), (&#39;v&#39;, 1), (&#39;w&#39;, 1)]</code></pre>
+<div class="sourceCode" id="cb305"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb305-1"><a href="#cb305-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">sorted</span>(char_frequency.items(), key<span class="op">=</span><span class="kw">lambda</span> kv: kv[<span class="dv">1</span>]))</span></code></pre></div>
+<pre><code>[(&#39;T&#39;, 1), (&#39;h&#39;, 1), (&#39;a&#39;, 1), (&#39;c&#39;, 1), (&#39;v&#39;, 1), (&#39;w&#39;, 1), (&#39;q&#39;, 1), (&#39;u&#39;, 1), (&#39;m&#39;, 2), (&#39;t&#39;, 2), (&#39;s&#39;, 3), (&#39;o&#39;, 3), (&#39;n&#39;, 3), (&#39;e&#39;, 3), (&#39;i&#39;, 5), (&#39; &#39;, 5)]</code></pre>
+<div class="sourceCode" id="cb307"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb307-1"><a href="#cb307-1" aria-hidden="true" tabindex="-1"></a>char_frequency_sorted <span class="op">=</span> <span class="bu">sorted</span>(</span>
+<span id="cb307-2"><a href="#cb307-2" aria-hidden="true" tabindex="-1"></a>                          char_frequency.items(),</span>
+<span id="cb307-3"><a href="#cb307-3" aria-hidden="true" tabindex="-1"></a>                          key<span class="op">=</span><span class="kw">lambda</span> kv: kv[<span class="dv">1</span>])</span>
+<span id="cb307-4"><a href="#cb307-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(char_frequency_sorted)</span></code></pre></div>
+<pre><code>[(&#39;T&#39;, 1), (&#39;h&#39;, 1), (&#39;a&#39;, 1), (&#39;c&#39;, 1), (&#39;v&#39;, 1), (&#39;w&#39;, 1), (&#39;q&#39;, 1), (&#39;u&#39;, 1), (&#39;m&#39;, 2), (&#39;t&#39;, 2), (&#39;s&#39;, 3), (&#39;o&#39;, 3), (&#39;n&#39;, 3), (&#39;e&#39;, 3), (&#39;i&#39;, 5), (&#39; &#39;, 5)]</code></pre>
+<div class="sourceCode" id="cb309"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb309-1"><a href="#cb309-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(char_frequency_sorted[<span class="op">-</span><span class="dv">1</span>])</span></code></pre></div>
+<pre><code>(&#39; &#39;, 5)</code></pre>
+<div class="sourceCode" id="cb311"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb311-1"><a href="#cb311-1" aria-hidden="true" tabindex="-1"></a>char_frequency_sorted <span class="op">=</span> <span class="bu">sorted</span>(</span>
+<span id="cb311-2"><a href="#cb311-2" aria-hidden="true" tabindex="-1"></a>                          char_frequency.items(),</span>
+<span id="cb311-3"><a href="#cb311-3" aria-hidden="true" tabindex="-1"></a>                          key<span class="op">=</span><span class="kw">lambda</span> kv: kv[<span class="dv">1</span>],</span>
+<span id="cb311-4"><a href="#cb311-4" aria-hidden="true" tabindex="-1"></a>                          reverse<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb311-5"><a href="#cb311-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(char_frequency_sorted)</span></code></pre></div>
+<pre><code>[(&#39;i&#39;, 5), (&#39; &#39;, 5), (&#39;s&#39;, 3), (&#39;o&#39;, 3), (&#39;n&#39;, 3), (&#39;e&#39;, 3), (&#39;m&#39;, 2), (&#39;t&#39;, 2), (&#39;T&#39;, 1), (&#39;h&#39;, 1), (&#39;a&#39;, 1), (&#39;c&#39;, 1), (&#39;v&#39;, 1), (&#39;w&#39;, 1), (&#39;q&#39;, 1), (&#39;u&#39;, 1)]</code></pre>
+<div class="sourceCode" id="cb313"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb313-1"><a href="#cb313-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(char_frequency_sorted[<span class="dv">0</span>])</span></code></pre></div>
+<pre><code>(&#39;i&#39;, 5)</code></pre>
+<ul>
+<li><p>Dictionaries, like sets, are <strong>unordered
+collections</strong>, so we <strong><em>cannot sort
+them.</em></strong></p></li>
+<li><p>We can only sort lists, so we need to pull out the items of the
+dictionary and <strong>put them in a list</strong> for sorting:<br />
+1 We take out each key-value pair<br />
+2 Convert it into a tuple<br />
+3 And then put it in a list<br />
+4 We end with a list of tuples that we can easily sort</p></li>
+</ul>
+<blockquote>
+<p>Remember: <code>items()</code> method returns a list of key-values
+tupples, that is, it performs the three first steps (1,2,3) at
+once:<br />
+<code>print(char_frequency.items())</code></p>
+<p>Then, we perform the fourth step with the <code>sorted()</code>
+function: <code>print(sorted(char_frequency.items()))</code></p>
+<p>But <code>sorted()</code> returns an unordered list of tuples
+because, by default, it doesn’t know how to sort that iterable
+object.</p>
+<p>So, we have to <code>give a key</code> with a
+<code>lambda function</code> that takes a key-value pair and returns the
+value:<br />
+<code>print(sorted(char_frequency.items(), key=lambda kv: kv[1]))</code></p>
+<p>At this point, we know that <code>sorted()</code> sorts by default in
+ascending order, so our result will be in the last position of the
+list:<br />
+<code>char_frequency_sorted = sorted(char_frequency.items(), key=lambda kv: kv[1])</code></p>
+<p>We could also reverse the sorting, and print the first element:<br />
+<code>char_frequency_sorted = sorted( char_frequency.items(), key=lambda kv: kv[1], reverse=True)</code></p>
+</blockquote>
+<p><a href="#TOC">↺</a></p>
+<hr />
+</div>
+</div>
+<div id="session-info." class="section level1" number="11">
+<h1><span class="header-section-number">11</span> Session Info.</h1>
+<div class="sourceCode" id="cb315"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="#cb315-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
+<pre><code>R version 3.6.3 (2020-02-29)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Ubuntu 18.04.6 LTS
+
+Matrix products: default
+BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.7.1
+LAPACK: /home/christian/anaconda3/lib/libmkl_rt.so
+
+locale:
+ [1] LC_CTYPE=es_AR.UTF-8       LC_NUMERIC=C              
+ [3] LC_TIME=es_AR.UTF-8        LC_COLLATE=es_AR.UTF-8    
+ [5] LC_MONETARY=es_AR.UTF-8    LC_MESSAGES=es_AR.UTF-8   
+ [7] LC_PAPER=es_AR.UTF-8       LC_NAME=C                 
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+[11] LC_MEASUREMENT=es_AR.UTF-8 LC_IDENTIFICATION=C       
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] reticulate_1.23
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_1.0.7        rstudioapi_0.13   knitr_1.41        magrittr_2.0.2   
+ [5] here_0.1          lattice_0.20-45   R6_2.5.1          rlang_1.0.6      
+ [9] fastmap_1.1.0     stringr_1.4.0     tools_3.6.3       grid_3.6.3       
+[13] xfun_0.36         png_0.1-7         cli_3.6.0         jquerylib_0.1.4  
+[17] htmltools_0.5.2   rprojroot_1.3-2   yaml_2.2.1        digest_0.6.29    
+[21] assertthat_0.2.1  Matrix_1.5-1      klippy_0.0.0.9500 sass_0.4.0       
+[25] evaluate_0.19     rmarkdown_2.11    stringi_1.7.6     compiler_3.6.3   
+[29] bslib_0.3.0       backports_1.4.1   jsonlite_1.7.2   </code></pre>
+<hr />
+</div>
+
+<div style="width: 100%; padding: 10px; box-sizing: border-box; text-align: justify; border: 1px solid gray;">
+  <p style="font-family: 'Playfair Display', serif; font-style: italic;">Copyright &copy; 2020 por <b>Christian A. Karanicolas</b>.  Todos los derechos reservados.  La elaboración de este sitio ha tenido como fuente principal de información el curso de <b>Complete Python Mastery</b> de <b>Mosh Hamedani</b>.</p>
+</div>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+</style>
+
+
+<!--
+<p style="font-family: 'Playfair Display', serif; font-style: italic;">Copyright &copy; 2020 por <b>Christian A. Karanicolas</b>.  Todos los derechos reservados.  La elaboración de este sitio ha tenido como fuente principal de información el curso de <b>Especialización en Ciencias de Datos</b> brindado por la <b>Johns Hopkins University</b> a través de <b>Coursera</b>.</p>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+</style>
+-->
+
+
+<!--
+<p style="font-style: italic;">Copyright &copy; 2020 por <b>Christian A. Karanicolas</b>.  Todos los derechos reservados.  La elaboración de este sitio ha tenido como fuente principal de información el curso de <b>Especialización en Ciencias de Datos</b> brindado por la <b>Johns Hopkins University</b> a través de <b>Coursera</b>.</p>
+-->
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
